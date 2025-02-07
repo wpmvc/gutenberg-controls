@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useMemo } from '@wordpress/element';
+import { useMemo, Fragment } from '@wordpress/element';
 import * as React from 'react';
 
 /**
@@ -58,11 +58,11 @@ const controlGenerators: {
  * @param {ControlProps} props Component props
  * @returns {JSX.Element | null} Rendered control components or null
  */
-const Controls: React.FC< ControlProps > = ( {
+export function Controls( {
 	controls,
 	attributes,
 	...props
-}: ControlProps ): JSX.Element | null => {
+}: ControlProps ): JSX.Element | null {
 	/**
 	 * Memoized list of control keys to prevent unnecessary recalculation
 	 * on re-renders.
@@ -79,7 +79,7 @@ const Controls: React.FC< ControlProps > = ( {
 	}
 
 	return (
-		<>
+		<Fragment>
 			{ controlKeys.map( ( key ) => {
 				const control = _controls[ key ] ?? {};
 
@@ -114,8 +114,6 @@ const Controls: React.FC< ControlProps > = ( {
 					/>
 				);
 			} ) }
-		</>
+		</Fragment>
 	);
-};
-
-export { Controls };
+}
