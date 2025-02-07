@@ -21,6 +21,12 @@ import Number from './controls/number';
 import Panel from './controls/panel';
 import PickColor from './controls/color-picker';
 import Radio from './controls/radio';
+import Select from './controls/select';
+import Slider from './controls/slider';
+import Switch from './controls/switch';
+import Text from './controls/text';
+import Colors from './controls/colors';
+import ToggleGroup from './controls/toggle-group';
 
 /**
  * Mapping of control types to their respective components
@@ -30,6 +36,7 @@ const controlGenerators: {
 	[ key: string ]: React.ComponentType< ControlProps >;
 } = {
 	color: PickColor as React.ComponentType< ControlProps >,
+	colors: Colors,
 	checkbox: Checkbox,
 	border: Border,
 	dimension: Dimension,
@@ -37,9 +44,11 @@ const controlGenerators: {
 	number: Number,
 	panel: Panel,
 	radio: Radio as React.ComponentType< ControlProps >,
-	// Add other control types here if necessary
-	// radio: RadioControl,
-	// text: TextControl,
+	select: Select,
+	slider: Slider,
+	switch: Switch,
+	text: Text,
+	toggle_group: ToggleGroup,
 };
 
 /**

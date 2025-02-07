@@ -17,7 +17,7 @@ export default function Panel( props: ControlProps ): JSX.Element {
 			title={ control.label }
 			initialOpen={ control?.initialOpen ?? false }
 		>
-			<Controls controls={ control.children } { ...props } />
+			<Controls { ...props } controls={ control.controls } />
 		</PanelBody>
 	);
 }
