@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
  * Internal dependencies
  */
 import { ControlProps } from '../types/control';
-import { Controls } from '..';
+import Controls from '.';
 
 export default function Panel( props: ControlProps ): JSX.Element {
 	const { control } = props;
