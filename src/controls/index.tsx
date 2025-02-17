@@ -26,6 +26,7 @@ import Switch from './switch';
 import Text from './text';
 import Colors from './colors';
 import ToggleGroup from './toggle-group';
+import Repeater from './repeater';
 
 /**
  * Mapping of control types to their respective components
@@ -51,6 +52,7 @@ const controlGenerators: {
 	switch: Switch,
 	text: Text,
 	toggle_group: ToggleGroup,
+	repeater: Repeater,
 };
 
 /**
