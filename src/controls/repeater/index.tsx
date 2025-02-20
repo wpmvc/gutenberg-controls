@@ -25,7 +25,7 @@ import {
 import { Button } from '@wordpress/components';
 import { ControlProps } from '../../types/control';
 import Controls from '..';
-import { findIndex } from 'lodash';
+import { findIndex, isEmpty } from 'lodash';
 
 import {
 	Action,
@@ -43,12 +43,12 @@ import {
 /**
  * Represents an item in the repeater list.
  * @interface Item
- * @property {string} id - Unique identifier for the item.
+ * @property {number} id - Unique identifier for the item.
  * @property {boolean} collapsed - Whether the item is collapsed or expanded.
  * @property {string} [key: string] - Additional properties for the item.
  */
 interface Item {
-	id: string;
+	id: number;
 	collapsed: boolean;
 	[ key: string ]: any;
 }
@@ -65,6 +65,13 @@ interface Item {
  */
 interface RepeaterProps extends ControlProps {
 	[ key: string ]: any;
+}
+
+function getMaxId( attribute: Item[] ) {
+	return attribute.reduce(
+		( max: number, item: Item ) => ( item.id > max ? item.id : max ),
+		0
+	);
 }
 
 /**
@@ -108,7 +115,7 @@ export default function Repeater( props: RepeaterProps ) {
 	 */
 	const addItem = useCallback( () => {
 		const newItem = {
-			id: Date.now().toString(),
+			id: getMaxId( attribute ) + 1,
 			label: 'New Item',
 			value: 'New Value',
 			collapsed: true,
@@ -119,10 +126,10 @@ export default function Repeater( props: RepeaterProps ) {
 
 	/**
 	 * Removes an item from the repeater list by its ID.
-	 * @param {string} id - The ID of the item to remove.
+	 * @param {number} id - The ID of the item to remove.
 	 */
 	const removeItem = useCallback(
-		( id: string ) => {
+		( id: number ) => {
 			const newAttributes = attribute.filter(
 				( item: Item ) => item.id !== id
 			);
@@ -133,17 +140,17 @@ export default function Repeater( props: RepeaterProps ) {
 
 	/**
 	 * Duplicates an item in the repeater list by its ID.
-	 * @param {string} id - The ID of the item to duplicate.
+	 * @param {number} id - The ID of the item to duplicate.
 	 */
 	const duplicateItem = useCallback(
-		( id: string ) => {
+		( id: number ) => {
 			const itemToDuplicate = attribute.find(
 				( item: Item ) => item.id === id
 			);
 			if ( itemToDuplicate ) {
 				const newItem = {
-					id: Date.now().toString(),
 					...itemToDuplicate,
+					id: getMaxId( attribute ) + 1,
 				};
 				const newAttributes = [ ...attribute, newItem ];
 				setAttributes( { [ attr_key ]: newAttributes } );
@@ -154,10 +161,10 @@ export default function Repeater( props: RepeaterProps ) {
 
 	/**
 	 * Toggles the collapsed state of an item by its ID.
-	 * @param {string} id - The ID of the item to toggle.
+	 * @param {number} id - The ID of the item to toggle.
 	 */
 	const toggleCollapse = useCallback(
-		( id: string ) => {
+		( id: number ) => {
 			const newAttributes = attribute.map( ( item: Item ) =>
 				item.id === id ? { ...item, collapsed: ! item.collapsed } : item
 			);
@@ -198,11 +205,17 @@ export default function Repeater( props: RepeaterProps ) {
 						</ItemList>
 					</SortableContext>
 				</DndContext>
-				<ButtonContainer className="repeater-button-container">
-					<Button onClick={ addItem } variant="primary" size="small">
-						+ ADD ITEM
-					</Button>
-				</ButtonContainer>
+				{ ! control?.fixed && (
+					<ButtonContainer className="repeater-button-container">
+						<Button
+							onClick={ addItem }
+							variant="primary"
+							size="small"
+						>
+							+ ADD ITEM
+						</Button>
+					</ButtonContainer>
+				) }
 			</Container>
 		</div>
 	);
@@ -219,9 +232,9 @@ export default function Repeater( props: RepeaterProps ) {
  */
 interface SortableItemProps {
 	item: Item;
-	onRemove: ( id: string ) => void;
-	onDuplicate: ( id: string ) => void;
-	onToggleCollapse: ( id: string ) => void;
+	onRemove: ( id: number ) => void;
+	onDuplicate: ( id: number ) => void;
+	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterProps;
 }
 
@@ -248,7 +261,7 @@ const SortableItem = memo(
 			isDragging,
 		} = useSortable( { id: item.id } );
 
-		const { attr_key, attributes, setAttributes } = repeaterProps;
+		const { attr_key, attributes, control, setAttributes } = repeaterProps;
 		const attribute = attributes[ attr_key ];
 		const itemIndex = findIndex( attribute, { id: item.id } );
 
@@ -274,32 +287,41 @@ const SortableItem = memo(
 						>
 							<GripVertical size={ 16 } />
 						</SortButton>
-						<span style={ { fontWeight: 500, color: '#1e1e1e' } }>
-							{ item.label }
+						<span
+							style={ {
+								fontWeight: 500,
+								color: '#1e1e1e',
+								padding: '9px 0px',
+							} }
+						>
+							{ item[ control?.title_field ] ??
+								`Item #${ item.id }` }
 						</span>
 					</ItemHeaderContent>
-					<ItemHeaderActions className="header-actions">
-						<Action
-							onClick={ ( event ) => {
-								event.stopPropagation();
-								onDuplicate( item.id );
-							} }
-							className="copy"
-						>
-							<Copy size={ 16 } />
-						</Action>
-						<Action
-							onClick={ ( event ) => {
-								event.stopPropagation();
-								onRemove( item.id );
-							} }
-							className="remove"
-						>
-							<X size={ 16 } />
-						</Action>
-					</ItemHeaderActions>
+					{ ! control?.fixed && (
+						<ItemHeaderActions className="header-actions">
+							<Action
+								onClick={ ( event ) => {
+									event.stopPropagation();
+									onDuplicate( item.id );
+								} }
+								className="copy"
+							>
+								<Copy size={ 16 } />
+							</Action>
+							<Action
+								onClick={ ( event ) => {
+									event.stopPropagation();
+									onRemove( item.id );
+								} }
+								className="remove"
+							>
+								<X size={ 16 } />
+							</Action>
+						</ItemHeaderActions>
+					) }
 				</ItemHeader>
-				{ ! item.collapsed && (
+				{ ! isEmpty( control.controls ) && ! item.collapsed && (
 					<div
 						style={ {
 							padding: 10,
@@ -320,7 +342,7 @@ const SortableItem = memo(
 									[ attr_key ]: updatedAttributes,
 								} );
 							} }
-							controls={ repeaterProps.control.controls }
+							controls={ control.controls }
 						/>
 					</div>
 				) }

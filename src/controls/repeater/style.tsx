@@ -22,11 +22,12 @@ export const ItemContainer = styled.div< { dragging: number } >`
 	transition: all 0.2s ease;
 `;
 
-export const ItemHeader = styled.div`
+export const ItemHeader = styled.div< { fixed: number } >`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	z-index: ${ ( props ) => ( props.fixed ? 'inherit' : 'pointer' ) };
 `;
 
 export const ItemHeaderContent = styled.div`
