@@ -10,6 +10,7 @@ interface NoticeControl extends Control {
 	status: 'error' | 'warning' | 'success' | 'info';
 	isDismissible?: boolean;
 	onRemove: () => void;
+	addMarginBottom?: boolean;
 }
 
 interface NoticeControlProps extends ControlProps {
@@ -24,7 +25,7 @@ export default function Notice( { control }: NoticeControlProps ): JSX.Element {
 			status={ status }
 			isDismissible={ isDismissible }
 			onRemove={ onRemove }
-			className={ className }
+			className={ 'components-base-control ' + ( className ?? '' ) }
 		>
 			{ notice }
 		</WpNotice>

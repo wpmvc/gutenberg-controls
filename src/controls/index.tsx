@@ -27,12 +27,13 @@ import Text from './text';
 import Colors from './colors';
 import ToggleGroup from './toggle-group';
 import Repeater from './repeater';
+import Notice from './notice';
 
 /**
  * Mapping of control types to their respective components
  * Sorted by control type for consistent rendering order
  */
-const controlGenerators: {
+const defaultComponents: {
 	//@ts-ignore
 	[ key: string ]: ComponentType< ControlProps >;
 } = {
@@ -43,6 +44,7 @@ const controlGenerators: {
 	border: Border,
 	dimension: Dimension,
 	height: Height,
+	notice: Notice,
 	number: Number,
 	panel: Panel,
 	radio: Radio,
@@ -55,17 +57,14 @@ const controlGenerators: {
 };
 
 /**
- * Controls component that dynamically renders various control components
+ * PrivateControls component that dynamically renders various control components
  * based on the `controls` prop provided.
  *
  * @param {ControlProps} props Component props
  * @returns {JSX.Element | null} Rendered control components or null
  */
-export default function Controls( {
-	controls,
-	attributes,
-	...props
-}: ControlProps ): JSX.Element | null {
+export function PrivateControls( props: ControlProps ): JSX.Element | null {
+	const { controls, attributes, components } = props;
 	/**
 	 * Memoized list of control keys to prevent unnecessary recalculation
 	 * on re-renders.
@@ -84,7 +83,7 @@ export default function Controls( {
 				const control: Control = _controls[ key ] ?? {};
 
 				// Dynamically select the control component based on the control.type
-				const ControlView = controlGenerators[ control.type ];
+				const ControlView = components[ control.type ];
 
 				// If no control component exists, log an error and skip rendering
 				if ( ! ControlView ) {
@@ -115,5 +114,19 @@ export default function Controls( {
 				);
 			} ) }
 		</Fragment>
+	);
+}
+
+/**
+ * @param {ControlProps} props Component props
+ * @returns {JSX.Element | null} Rendered control components or null
+ */
+export default function Controls( props: ControlProps ): JSX.Element | null {
+	const { components } = props;
+	return (
+		<PrivateControls
+			{ ...props }
+			components={ { ...defaultComponents, ...components } }
+		/>
 	);
 }

@@ -8,7 +8,7 @@ import { PanelBody } from '@wordpress/components';
  * Internal dependencies
  */
 import { Control, ControlProps } from '../types/control';
-import Controls from '.';
+import { PrivateControls } from '.';
 
 interface PanelControl extends Control {
 	initialOpen?: boolean;
@@ -26,7 +26,7 @@ export default function Panel( props: PanelControlProps ): JSX.Element {
 			title={ control.label }
 			initialOpen={ control?.initialOpen ?? false }
 		>
-			<Controls { ...props } controls={ control.controls } />
+			<PrivateControls { ...props } controls={ control.controls } />
 		</PanelBody>
 	);
 }

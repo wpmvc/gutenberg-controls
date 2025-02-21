@@ -21,6 +21,7 @@ export interface ControlProps {
 	metaData: { [ key: string ]: any };
 	placement: 'left-start' | 'right-start';
 	offset?: number;
+	components: { [ key: string ]: any };
 	// [ key: string ]: any;
 }
 

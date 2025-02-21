@@ -24,7 +24,7 @@ import {
 //@ts-ignore
 import { Button } from '@wordpress/components';
 import { Control, ControlProps } from '../../types/control';
-import Controls from '..';
+import { PrivateControls } from '..';
 import { findIndex, isEmpty } from 'lodash';
 
 import {
@@ -340,7 +340,7 @@ const SortableItem = memo(
 						} }
 						className="repeater-item-content"
 					>
-						<Controls
+						<PrivateControls
 							{ ...repeaterProps }
 							attributes={ attribute[ itemIndex ] }
 							setAttributes={ ( newAttributes ) => {
