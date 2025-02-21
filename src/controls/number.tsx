@@ -32,7 +32,10 @@ export default function Number( props: ControlProps ): JSX.Element {
 				step={ 1 }
 				value={ getValue( props ) }
 				onChange={ ( value: string | undefined ) =>
-					updateAttribute( value ? parseFloat(value) : undefined, props )
+					updateAttribute(
+						value ? parseFloat( value ) : undefined,
+						props
+					)
 				}
 			/>
 		</StyledBlockEditorControl>

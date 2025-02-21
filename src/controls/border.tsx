@@ -82,7 +82,7 @@ export default function Border( props: BorderControlProps ): JSX.Element {
 			label={ __( 'Border' ) }
 			resetAll={ () => updateAttribute( defaultValues, props ) }
 			panelId={ panelId }
-			dropdownMenuProps={{ ...dropdownProps(), label: __( 'Border' ) }}
+			dropdownMenuProps={ { ...dropdownProps(), label: __( 'Border' ) } }
 			style={
 				control?.insidePanel
 					? {

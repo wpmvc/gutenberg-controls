@@ -1,5 +1,5 @@
 // @ts-ignore
-import { DropdownMenu} from '@wordpress/components';
+import { DropdownMenu } from '@wordpress/components';
 import styled from 'styled-components';
 import { __ } from '@wordpress/i18n';
 import { values, omit } from 'lodash';
@@ -64,7 +64,9 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 	return (
 		<StyledDropdown
 			popoverProps={ { className: 'x-currency-responsive-popover' } }
-			controls={ values( omit( responsiveOptions, device ) ) as DropdownOption[] } // Remove current device
+			controls={
+				values( omit( responsiveOptions, device ) ) as DropdownOption[] // Remove current device from options
+			}
 			icon={ responsiveOptions[ device ].icon }
 			label={ __( 'Responsive' ) }
 		/>

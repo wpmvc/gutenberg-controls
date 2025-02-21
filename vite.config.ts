@@ -34,6 +34,7 @@ export default defineConfig({
           '@wordpress/data': 'wp.data',
           '@wordpress/hooks': 'wp.hooks',
           '@wordpress/compose': 'wp.compose',
+          '@wordpress/block-editor': 'wp.blockEditor',
         },
       },
     },
