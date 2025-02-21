@@ -7,10 +7,19 @@ import { PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { Control, ControlProps } from '../types/control';
 import Controls from '.';
 
-export default function Panel( props: ControlProps ): JSX.Element {
+interface PanelControl extends Control {
+	initialOpen?: boolean;
+	controls: Control[];
+}
+
+interface PanelControlProps extends ControlProps {
+	control: PanelControl;
+}
+
+export default function Panel( props: PanelControlProps ): JSX.Element {
 	const { control } = props;
 	return (
 		<PanelBody

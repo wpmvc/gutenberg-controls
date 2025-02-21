@@ -7,11 +7,11 @@ import { SelectControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { SelectControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, updateAttribute } from '../utils';
 
-export default function Select( props: ControlProps ) {
+export default function Select( props: SelectControlProps ) {
 	const { control } = props;
 
 	const { label, options } = control || {};

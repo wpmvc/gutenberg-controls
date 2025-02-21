@@ -7,7 +7,7 @@ import {
 	//@ts-ignore
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { ControlProps } from '../types/control';
+import { SelectControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, updateAttribute } from '../utils';
 
@@ -15,7 +15,7 @@ import { getValue, updateAttribute } from '../utils';
  * Internal dependencies
  */
 
-export default function ToggleGroup( props: ControlProps ) {
+export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 	const { control } = props;
 	const toggleOptions = control.options;
 

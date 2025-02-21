@@ -1,25 +1,29 @@
-import { ReactNode } from 'react';
-
-interface ControlProps {
-	attr_key: string;
+export interface Control {
 	type: string;
 	label: string;
 	condition?: ( attributes: object ) => boolean;
-	attributes: { [ key: string ]: any };
-	setAttributes: ( attributes: { [ key: string ]: any } ) => void;
-	is_responsive?: boolean;
-	device: 'desktop' | 'tablet' | 'mobile';
-	controls?: { [ key: string ]: any };
-	control: { [ key: string ]: any };
-	[ key: string ]: any;
+	helpText?: string;
+	className?: string;
+	isResponsive?: boolean;
 }
 
-// interface ControlsProps {
-// 	control: ControlProps;
-// 	attr_key: string;
-// 	attributes: { [key: string]: object };
-// 	device?: string;
-// 	[key: string]: any;
-// }
+export interface SelectControl extends Control {
+	options: [ { label: string; value: string } ];
+}
 
-export { ControlProps };
+export interface ControlProps {
+	attr_key: string;
+	attributes: { [ key: string ]: any };
+	setAttributes: ( attributes: { [ key: string ]: any } ) => void;
+	device: 'desktop' | 'tablet' | 'mobile';
+	controls?: { [ key: string ]: any };
+	control: Control;
+	metaData: { [ key: string ]: any };
+	placement: 'left-start' | 'right-start';
+	offset?: number;
+	// [ key: string ]: any;
+}
+
+export interface SelectControlProps extends ControlProps {
+	control: SelectControl;
+}

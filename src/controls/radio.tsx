@@ -5,21 +5,9 @@
 import { RadioControl } from '@wordpress/components';
 import { getValue, updateAttribute } from '../utils';
 import Label from '../components/label';
-import { ControlProps } from '../types/control';
+import { SelectControlProps } from '../types/control';
 
-/**
- * Internal dependencies
- */
-
-interface RadioProps extends ControlProps {
-	control: {
-		label: string;
-		options: { label: string; value: string }[];
-	};
-	[ key: string ]: any; // For any other props passed into the component
-}
-
-export default function Radio( props: RadioProps ): JSX.Element {
+export default function Radio( props: SelectControlProps ): JSX.Element {
 	const { control } = props;
 	const { label, options } = control || {};
 

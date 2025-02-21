@@ -28,9 +28,9 @@ const StyledToggleControl = styled( ToggleControl )`
 export default function Switch( props: ControlProps ) {
 	const { control } = props;
 
-	const isDisabled = isFunction( control?.is_disabled )
-		? control.is_disabled()
-		: control?.is_disabled;
+	// const isDisabled = isFunction( control?.is_disabled )
+	// 	? control.is_disabled()
+	// 	: control?.is_disabled;
 
 	return (
 		<StyledToggleControl
@@ -41,8 +41,8 @@ export default function Switch( props: ControlProps ) {
 			}
 			checked={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
-			className={ control?.cssClass }
-			disabled={ isDisabled }
+			className={ control?.className }
+			// disabled={ isDisabled }
 		/>
 	);
 }

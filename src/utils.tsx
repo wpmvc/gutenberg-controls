@@ -6,7 +6,7 @@ import { ControlProps } from './types/control';
 
 export function isResponsive( controlProps: ControlProps ): boolean {
 	const { control } = controlProps;
-	return has( control, 'is_responsive' ) && control.is_responsive === true;
+	return has( control, 'isResponsive' ) && control.isResponsive === true;
 }
 
 export function getValue(

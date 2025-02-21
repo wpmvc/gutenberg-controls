@@ -1,13 +1,13 @@
 /**
  * WordPress dependencies
  */
-import { useMemo, Fragment, ComponentType } from '@wordpress/element';
+import { Fragment, ComponentType } from '@wordpress/element';
 
 /**
  * External dependencies
  */
 import { has } from 'lodash';
-import { ControlProps } from '../types/control';
+import { ControlProps, Control, SelectControlProps } from '../types/control';
 
 /**
  * Internal dependencies
@@ -37,7 +37,7 @@ const controlGenerators: {
 	[ key: string ]: ComponentType< ControlProps >;
 } = {
 	//@ts-ignore
-	color: PickColor as ComponentType< ControlProps >,
+	color: PickColor,
 	colors: Colors,
 	checkbox: Checkbox,
 	border: Border,
@@ -45,8 +45,7 @@ const controlGenerators: {
 	height: Height,
 	number: Number,
 	panel: Panel,
-	//@ts-ignore
-	radio: Radio as ComponentType< ControlProps >,
+	radio: Radio,
 	select: Select,
 	slider: Slider,
 	switch: Switch,
@@ -72,10 +71,7 @@ export default function Controls( {
 	 * on re-renders.
 	 */
 	const _controls = controls ?? {};
-	const controlKeys = useMemo(
-		() => Object.keys( _controls ),
-		[ _controls ]
-	);
+	const controlKeys = Object.keys( _controls );
 
 	// Early return if no controls exist
 	if ( controlKeys.length === 0 ) {
@@ -85,15 +81,15 @@ export default function Controls( {
 	return (
 		<Fragment>
 			{ controlKeys.map( ( key ) => {
-				const control = _controls[ key ] ?? {};
+				const control: Control = _controls[ key ] ?? {};
 
 				// Dynamically select the control component based on the control.type
-				const ControlView = controlGenerators[ control?.type ];
+				const ControlView = controlGenerators[ control.type ];
 
 				// If no control component exists, log an error and skip rendering
 				if ( ! ControlView ) {
 					console.error(
-						`No control component found for type: ${ control?.type }`
+						`No control component found for type: ${ control.type }`
 					);
 					return null;
 				}

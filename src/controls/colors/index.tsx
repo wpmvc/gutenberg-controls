@@ -21,25 +21,16 @@ import { isEqual } from 'lodash';
  */
 import Popover from './popover';
 import Indicator from './indicator';
+import { Control, ControlProps } from '../../types/control';
 
-function useToolsPanelDropdownMenuProps() {
-	const isMobile = useViewportMatch( 'medium', '<' );
-	return ! isMobile
-		? {
-				popoverProps: {
-					placement: 'right-start',
-					// For non-mobile, inner sidebar width (248px) - button width (24px) - border (1px) + padding (16px) + spacing (20px)
-					offset: 36,
-				},
-		  }
-		: {};
+interface ColorsControl extends Control {
+	items: { [ key: string ]: any };
+	insidePanel?: boolean;
 }
 
-const popoverProps = {
-	placement: 'left-start',
-	offset: 36,
-	shift: true,
-};
+interface ColorsControlProps extends ControlProps {
+	control: ColorsControl;
+}
 
 export default function Colors( {
 	attr_key,
@@ -47,7 +38,9 @@ export default function Colors( {
 	control,
 	attributes,
 	setAttributes,
-}: any ) {
+	placement,
+	offset,
+}: ColorsControlProps ): JSX.Element {
 	const panelId = attr_key;
 	const resetAll = () => {
 		setAttributes( {
@@ -75,6 +68,21 @@ export default function Colors( {
 		} );
 	};
 
+	function dropdownProps() {
+		const isMobile = useViewportMatch( 'medium', '<' );
+		return ! isMobile
+			? {
+					popoverProps: {
+						placement: placement ? placement : 'left-start',
+						// For non-mobile, inner sidebar width (248px) - button width (24px) - border (1px) + padding (16px) + spacing (20px)
+						offset: offset ? offset : 259,
+					},
+			  }
+			: {};
+	}
+
+	const _dropdownProps = dropdownProps();
+
 	return (
 		<ToolsPanel
 			label={ control.label }
@@ -85,7 +93,7 @@ export default function Colors( {
 			className="color-block-support-panel"
 			__experimentalFirstVisibleItemClass="first"
 			__experimentalLastVisibleItemClass="last"
-			dropdownMenuProps={ useToolsPanelDropdownMenuProps() }
+			dropdownMenuProps={ _dropdownProps }
 			style={ {
 				...( control?.insidePanel
 					? {
@@ -116,7 +124,13 @@ export default function Colors( {
 							isShownByDefault={ element.showByDefault }
 						>
 							<Dropdown
-								popoverProps={ popoverProps }
+								popoverProps={ {
+									placement: placement
+										? placement
+										: 'left-start',
+									offset: 36,
+									shift: true,
+								} }
 								className="block-editor-tools-panel-color-gradient-settings__dropdown"
 								renderToggle={ ( {
 									isOpen,

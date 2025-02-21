@@ -3,26 +3,22 @@ import { ColorPicker, Dropdown, Button } from '@wordpress/components';
 //@ts-ignore
 import { useViewportMatch } from '@wordpress/compose';
 import { ControlProps } from '../types/control';
-
-interface PickColorProps extends ControlProps {
-	control: {
-		label: string;
-		offset?: number;
-	};
-}
+import { useMemo } from 'react';
 
 export default function PickColor( {
 	attr_key,
 	control,
 	attributes,
 	setAttributes,
-}: PickColorProps ): JSX.Element {
+	placement,
+	offset,
+}: ControlProps ): JSX.Element {
 	function dropdownProps() {
 		const isMobile = useViewportMatch( 'medium', '<' );
 		return ! isMobile
 			? {
-					placement: 'left-start',
-					offset: control.offset ? control.offset : 148,
+					placement: placement ? placement : 'left-start',
+					offset: offset ? offset : 259,
 			  }
 			: {};
 	}

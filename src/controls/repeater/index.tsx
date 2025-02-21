@@ -23,7 +23,7 @@ import {
 } from '@dnd-kit/modifiers';
 //@ts-ignore
 import { Button } from '@wordpress/components';
-import { ControlProps } from '../../types/control';
+import { Control, ControlProps } from '../../types/control';
 import Controls from '..';
 import { findIndex, isEmpty } from 'lodash';
 
@@ -63,7 +63,15 @@ interface Item {
  * @property {Function} setAttributes - Function to update attributes.
  * @property {any} [key: string] - Additional props.
  */
+
+interface RepeaterControl extends Control {
+	fixed?: boolean;
+	title_field?: string;
+	controls: Control[];
+}
+
 interface RepeaterProps extends ControlProps {
+	control: RepeaterControl;
 	[ key: string ]: any;
 }
 
@@ -276,6 +284,9 @@ const SortableItem = memo(
 				className="repeater-item"
 			>
 				<ItemHeader
+					fixed={
+						control?.fixed ? control.fixed.toString() : 'false'
+					}
 					onClick={ () => onToggleCollapse( item.id ) }
 					className="repeater-header"
 				>
@@ -294,7 +305,7 @@ const SortableItem = memo(
 								padding: '9px 0px',
 							} }
 						>
-							{ item[ control?.title_field ] ??
+							{ item[ control?.title_field ?? 'defaultField' ] ??
 								`Item #${ item.id }` }
 						</span>
 					</ItemHeaderContent>

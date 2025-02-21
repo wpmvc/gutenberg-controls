@@ -32,19 +32,17 @@ const StyledInput = styled( InputControl )`
 
 export default function Text( props: ControlProps ) {
 	const { control } = props;
-	const { label, inputType, help_text } = control || {};
+	const { label, helpText } = control || {};
 
 	return (
 		<StyledInput
-			// isInvalid={ isInvalid }
 			label={
 				<Label { ...props } control={ control }>
 					{ label }
 				</Label>
 			}
-			// help={ isInvalid ? help_text : '' }
+			help={ helpText }
 			size="__unstable-large"
-			// type={ inputType }
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 		/>

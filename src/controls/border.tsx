@@ -18,35 +18,23 @@ import { useViewportMatch } from '@wordpress/compose';
  */
 import { isEqual } from 'lodash';
 import { getValue, updateAttribute } from '../utils';
-import { ControlProps } from '../types/control';
+import { Control, ControlProps } from '../types/control';
 
 /**
  * Types for the props of the Border component.
  */
-interface BorderProps extends ControlProps {
-	control: {
-		options?: string[];
-		insidePanel?: boolean;
-	};
-	metaData: {
-		attributes: {
-			[ key: string ]: {
-				default: any;
-			};
-		};
-	};
+interface BorderControl extends Control {
+	options?: string[];
+	insidePanel?: boolean;
 }
 
-const useToolsPanelDropdownMenuProps = () => {
-	const isMobile = useViewportMatch( 'medium', '<' );
-	return isMobile
-		? {}
-		: { popoverProps: { placement: 'right-start', offset: 36 } };
-};
+interface BorderControlProps extends ControlProps {
+	control: BorderControl;
+}
 
-export default function Border( props: ControlProps ): JSX.Element {
-	const { attr_key, control, metaData } = props;
-	const options = control?.options ?? [ 'border', 'radius' ];
+export default function Border( props: BorderControlProps ): JSX.Element {
+	const { attr_key, control, metaData, placement, offset } = props;
+	const options = control.options ?? [ 'border', 'radius' ];
 	const panelId = attr_key;
 	const defaultValues = metaData.attributes[ attr_key ]?.default ?? {};
 	const attribute = getValue( props );
@@ -76,13 +64,25 @@ export default function Border( props: ControlProps ): JSX.Element {
 			props
 		);
 	};
+	function dropdownProps() {
+		const isMobile = useViewportMatch( 'medium', '<' );
+		return ! isMobile
+			? {
+					popoverProps: {
+						placement: placement ? placement : 'left-start',
+						// For non-mobile, inner sidebar width (248px) - button width (24px) - border (1px) + padding (16px) + spacing (20px)
+						offset: offset ? offset : 259,
+					},
+			  }
+			: {};
+	}
 
 	return (
 		<ToolsPanel
 			label={ __( 'Border' ) }
 			resetAll={ () => updateAttribute( defaultValues, props ) }
 			panelId={ panelId }
-			dropdownMenuProps={ useToolsPanelDropdownMenuProps() }
+			dropdownMenuProps={ dropdownProps() }
 			style={
 				control?.insidePanel
 					? {

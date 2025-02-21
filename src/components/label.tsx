@@ -87,7 +87,7 @@ export default function Label( { children, control, ...props }: LabelProps ) {
 	return (
 		<div>
 			<StyledLabel>{ children }</StyledLabel>
-			{ control?.is_responsive && <Responsive { ...props } /> }
+			{ control?.isResponsive && <Responsive { ...props } /> }
 		</div>
 	);
 }
