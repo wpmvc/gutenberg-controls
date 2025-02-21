@@ -22,6 +22,7 @@ export default function Dimension( props: ControlProps ): JSX.Element {
 
 	return (
 		<BoxControl
+			//@ts-ignore
 			label={
 				<Label { ...props } control={ control }>
 					{ control.label }

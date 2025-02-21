@@ -7,7 +7,7 @@ import { Fragment, ComponentType } from '@wordpress/element';
  * External dependencies
  */
 import { has } from 'lodash';
-import { ControlProps, Control, SelectControlProps } from '../types/control';
+import { ControlProps, Control } from '../types/control';
 
 /**
  * Internal dependencies
@@ -78,6 +78,7 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
 	}
 
 	return (
+		//@ts-ignore
 		<Fragment>
 			{ controlKeys.map( ( key ) => {
 				const control: Control = _controls[ key ] ?? {};

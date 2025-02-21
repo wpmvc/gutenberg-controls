@@ -31,8 +31,8 @@ export default function Number( props: ControlProps ): JSX.Element {
 				size="__unstable-large"
 				step={ 1 }
 				value={ getValue( props ) }
-				onChange={ ( value: number ) =>
-					updateAttribute( value, props )
+				onChange={ ( value: string | undefined ) =>
+					updateAttribute( value ? parseFloat(value) : undefined, props )
 				}
 			/>
 		</StyledBlockEditorControl>

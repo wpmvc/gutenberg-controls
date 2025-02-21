@@ -93,7 +93,7 @@ export default function Colors( {
 			className="color-block-support-panel"
 			__experimentalFirstVisibleItemClass="first"
 			__experimentalLastVisibleItemClass="last"
-			dropdownMenuProps={ _dropdownProps }
+			dropdownMenuProps={{ ..._dropdownProps, label: control.label }}
 			style={ {
 				...( control?.insidePanel
 					? {

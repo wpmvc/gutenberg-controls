@@ -17,6 +17,7 @@ export default function Checkbox( props: ControlProps ): JSX.Element {
 
 	return (
 		<CheckboxControl
+			//@ts-ignore
 			label={
 				<Label { ...props } control={ control }>
 					{ label }

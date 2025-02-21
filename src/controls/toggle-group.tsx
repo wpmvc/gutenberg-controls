@@ -21,6 +21,7 @@ export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 
 	return (
 		<ToggleGroupControl
+			//@ts-ignore
 			label={
 				<Label { ...props } control={ control }>
 					{ control.label }

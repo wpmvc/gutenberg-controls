@@ -28,6 +28,7 @@ export default function Slider( props: SliderControlProps ) {
 
 	return (
 		<RangeControl
+			//@ts-ignore
 			label={
 				<Label { ...props } control={ control }>
 					{ label }

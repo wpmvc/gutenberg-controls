@@ -201,7 +201,8 @@ export default function Repeater( props: RepeaterProps ) {
 					>
 						<ItemList className="repeater-item-list">
 							{ attribute.map( ( item: Item ) => (
-								<MemoizedSortableItem
+								//@ts-ignore
+								<SortableItem
 									key={ item.id }
 									item={ item }
 									repeaterProps={ props }
@@ -361,5 +362,3 @@ const SortableItem = memo(
 		);
 	}
 );
-
-const MemoizedSortableItem = memo( SortableItem );

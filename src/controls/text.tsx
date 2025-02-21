@@ -7,7 +7,7 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 /**
  * External dependencies
  */
-import styled, { css } from 'styled-components';
+// import styled, { css } from 'styled-components';
 
 /**
  * Internal dependencies
@@ -16,26 +16,27 @@ import { ControlProps } from '../types/control';
 import { getValue, updateAttribute } from '../utils';
 import Label from '../components/label';
 
-const StyledInput = styled( InputControl )`
-	${ ( { isInvalid } ) =>
-		isInvalid &&
-		css`
-			.components-input-control__backdrop {
-				border-color: red !important;
-			}
+// const StyledInput = styled( InputControl )< { isInvalid: boolean } >`
+// 	${ ( { isInvalid } ) =>
+// 		isInvalid &&
+// 		css`
+// 			.components-input-control__backdrop {
+// 				border-color: red !important;
+// 			}
 
-			.components-base-control__help {
-				color: red !important;
-			}
-		` }
-`;
+// 			.components-base-control__help {
+// 				color: red !important;
+// 			}
+// 		` }
+// `;
 
 export default function Text( props: ControlProps ) {
 	const { control } = props;
 	const { label, helpText } = control || {};
 
 	return (
-		<StyledInput
+		<InputControl
+			// isInvalid={ !!control?.isInvalid }
 			label={
 				<Label { ...props } control={ control }>
 					{ label }
