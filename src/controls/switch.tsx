@@ -8,15 +8,14 @@ import { __ } from '@wordpress/i18n';
 /**
  * External dependencies
  */
-import { isFunction } from 'lodash';
+import styled from 'styled-components';
 
 /**
  * Internal dependencies
  */
-import styled from 'styled-components';
 import { ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 // Styled ToggleControl component
 const StyledToggleControl = styled( ToggleControl )`
@@ -28,21 +27,13 @@ const StyledToggleControl = styled( ToggleControl )`
 export default function Switch( props: ControlProps ) {
 	const { control } = props;
 
-	// const isDisabled = isFunction( control?.is_disabled )
-	// 	? control.is_disabled()
-	// 	: control?.is_disabled;
-
 	return (
 		<StyledToggleControl
-			label={
-				<Label { ...props } control={ control }>
-					{ control.label }
-				</Label>
-			}
+			label={ <Label { ...props } /> }
 			checked={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			disabled={ isDisabled( props ) }
 			className={ control?.className }
-			// disabled={ isDisabled }
 		/>
 	);
 }

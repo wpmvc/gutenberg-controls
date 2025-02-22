@@ -7,30 +7,44 @@ import {
 	//@ts-ignore
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { SelectControlProps } from '../types/control';
-import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
 
 /**
  * Internal dependencies
  */
+import { SelectControlProps } from '../types/control';
+import Label from '../components/label';
+import { getValue, isDisabled, updateAttribute } from '../utils';
+
+/**
+ * External dependencies
+ */
+import styled from 'styled-components';
+
+const StyledToggleGroup = styled( ToggleGroupControl )< {
+	isDisabled: string;
+} >`
+	${ ( props ) =>
+		'true' === props.isDisabled &&
+		`
+		pointer-events: none;
+		opacity: 0.5;
+	` }
+`;
 
 export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 	const { control } = props;
 	const toggleOptions = control.options;
 
 	return (
-		<ToggleGroupControl
+		<StyledToggleGroup
 			//@ts-ignore
-			label={
-				<Label { ...props } control={ control }>
-					{ control.label }
-				</Label>
-			}
+			label={ <Label { ...props } /> }
 			isBlock
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			size="__unstable-large"
+			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+			className={ control?.className }
 		>
 			{ toggleOptions.map( ( option: any, index: any ) => {
 				return (
@@ -41,6 +55,6 @@ export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 					/>
 				);
 			} ) }
-		</ToggleGroupControl>
+		</StyledToggleGroup>
 	);
 }

@@ -9,24 +9,22 @@ import { SelectControl } from '@wordpress/components';
  */
 import { SelectControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 export default function Select( props: SelectControlProps ) {
 	const { control } = props;
 
-	const { label, options } = control || {};
+	const { options } = control || {};
 
 	return (
 		<SelectControl
-			label={
-				<Label { ...props } control={ control }>
-					{ label }
-				</Label>
-			}
+			label={ <Label { ...props } /> }
 			options={ options }
 			size="__unstable-large"
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			disabled={ isDisabled( props ) }
+			className={ control?.className }
 		/>
 	);
 }

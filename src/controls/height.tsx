@@ -10,24 +10,33 @@ import styled from 'styled-components';
  */
 import { ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 const StyledBlockEditorControl = styled.div`
 	margin-bottom: 24px;
+`;
+
+const StyledHeightControl = styled( HeightControl )< {
+	isDisabled: string;
+} >`
+	${ ( props ) =>
+		'true' === props.isDisabled &&
+		`
+		pointer-events: none;
+		opacity: 0.5;
+	` }
 `;
 
 export default function Height( props: ControlProps ): JSX.Element {
 	const { control } = props;
 	return (
 		<StyledBlockEditorControl>
-			<HeightControl
-				label={
-					<Label { ...props } control={ control }>
-						{ control.label }
-					</Label>
-				}
+			<StyledHeightControl
+				label={ <Label { ...props } /> }
 				value={ getValue( props ) }
 				onChange={ ( value: any ) => updateAttribute( value, props ) }
+				isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+				className={ control?.className }
 			/>
 		</StyledBlockEditorControl>
 	);

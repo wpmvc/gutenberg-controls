@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { Control, ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 interface SliderControl extends Control {
 	max?: number;
@@ -24,20 +24,18 @@ interface SliderControlProps extends ControlProps {
 export default function Slider( props: SliderControlProps ) {
 	const { control } = props;
 
-	const { label, max = 100, min = 0 } = control || {};
+	const { max = 100, min = 0 } = control || {};
 
 	return (
 		<RangeControl
 			//@ts-ignore
-			label={
-				<Label { ...props } control={ control }>
-					{ label }
-				</Label>
-			}
+			label={ <Label { ...props } /> }
 			max={ max }
 			min={ min }
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			disabled={ isDisabled( props ) }
+			className={ control?.className }
 		/>
 	);
 }

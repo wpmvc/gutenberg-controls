@@ -36,10 +36,10 @@ import {
 	ItemHeaderActions,
 	ItemHeaderContent,
 	ItemList,
-	Label,
+	Label as StyledLabel,
 	SortButton,
 } from './style';
-
+import Label from '../../components/label';
 /**
  * Represents an item in the repeater list.
  * @interface Item
@@ -182,8 +182,10 @@ export default function Repeater( props: RepeaterProps ) {
 	);
 
 	return (
-		<div className="components-base-control repeater-wrapper">
-			<Label className="repeater-label">{ control.label }</Label>
+		<div className="components-base-control wpmvc-repeater-wrapper">
+			<StyledLabel className="repeater-label">
+				<Label { ...props } />
+			</StyledLabel>
 			<Container className="repeater-container">
 				<DndContext
 					sensors={ sensors }

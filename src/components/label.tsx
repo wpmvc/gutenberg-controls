@@ -3,9 +3,9 @@ import { DropdownMenu } from '@wordpress/components';
 import styled from 'styled-components';
 import { __ } from '@wordpress/i18n';
 import { values, omit } from 'lodash';
-import { ReactNode } from 'react';
 import { ControlProps } from '../types/control';
 import { DropdownOption } from '@wordpress/components/build-types/dropdown-menu/types';
+import ProBadge from './pro-badge';
 
 interface ResponsiveProps {
 	device: 'desktop' | 'tablet' | 'mobile';
@@ -82,15 +82,12 @@ const StyledLabel = styled.span`
 	padding: 0px;
 `;
 
-interface LabelProps extends ControlProps {
-	children: ReactNode;
-}
-
-export default function Label( { children, control, ...props }: LabelProps ) {
+export default function Label( { control, ...props }: ControlProps ) {
 	return (
 		<div>
-			<StyledLabel>{ children }</StyledLabel>
+			<StyledLabel>{ control.label }</StyledLabel>
 			{ control?.isResponsive && <Responsive { ...props } /> }
+			{ control?.isPro && <ProBadge /> }
 		</div>
 	);
 }

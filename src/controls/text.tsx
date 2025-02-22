@@ -13,8 +13,9 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
  * Internal dependencies
  */
 import { ControlProps } from '../types/control';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 import Label from '../components/label';
+import styled from 'styled-components';
 
 // const StyledInput = styled( InputControl )< { isInvalid: boolean } >`
 // 	${ ( { isInvalid } ) =>
@@ -30,22 +31,30 @@ import Label from '../components/label';
 // 		` }
 // `;
 
+const StyledInputControl = styled( InputControl )< {
+	isDisabled: string;
+} >`
+	${ ( props ) =>
+		'true' === props.isDisabled &&
+		`
+		pointer-events: none;
+		opacity: 0.5;
+	` }
+`;
+
 export default function Text( props: ControlProps ) {
 	const { control } = props;
-	const { label, helpText } = control || {};
+	const { helpText } = control || {};
 
 	return (
-		<InputControl
-			// isInvalid={ !!control?.isInvalid }
-			label={
-				<Label { ...props } control={ control }>
-					{ label }
-				</Label>
-			}
+		<StyledInputControl
+			label={ <Label { ...props } /> }
 			help={ helpText }
 			size="__unstable-large"
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+			className={ control?.className }
 		/>
 	);
 }

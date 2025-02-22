@@ -10,7 +10,7 @@ import styled from 'styled-components';
  */
 import { ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 const StyledBlockEditorControl = styled.div`
 	margin-bottom: 24px;
@@ -18,16 +18,10 @@ const StyledBlockEditorControl = styled.div`
 
 export default function Number( props: ControlProps ): JSX.Element {
 	const { control } = props;
-	const { label } = control || {};
-
 	return (
 		<StyledBlockEditorControl>
 			<NumberControl
-				label={
-					<Label { ...props } control={ control }>
-						{ label }
-					</Label>
-				}
+				label={ <Label { ...props } /> }
 				size="__unstable-large"
 				step={ 1 }
 				value={ getValue( props ) }
@@ -37,6 +31,8 @@ export default function Number( props: ControlProps ): JSX.Element {
 						props
 					)
 				}
+				disabled={ isDisabled( props ) }
+				className={ control?.className }
 			/>
 		</StyledBlockEditorControl>
 	);

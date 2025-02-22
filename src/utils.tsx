@@ -24,6 +24,10 @@ export function updateAttribute(
 	value: any,
 	controlProps: ControlProps
 ): void {
+	if ( isDisabled( controlProps ) ) {
+		return;
+	}
+
 	const { attr_key, setAttributes, attributes, device } = controlProps;
 
 	setAttributes( {
@@ -31,4 +35,20 @@ export function updateAttribute(
 			? { ...attributes[ attr_key ], [ device as string ]: value }
 			: value,
 	} );
+}
+
+export function isDisabled( {
+	control,
+	attributes,
+	isProAvailable,
+}: ControlProps ): boolean {
+	if ( !! control.isPro && ! isProAvailable ) {
+		return true;
+	}
+
+	if ( typeof control.isDisabled === 'function' ) {
+		return control.isDisabled( attributes );
+	}
+
+	return !! control.isDisabled;
 }

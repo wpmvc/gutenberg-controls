@@ -3,24 +3,34 @@
  */
 //@ts-ignore
 import { RadioControl } from '@wordpress/components';
-import { getValue, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 import Label from '../components/label';
 import { SelectControlProps } from '../types/control';
+import styled from 'styled-components';
+
+const StyleRadioControl = styled( RadioControl )< {
+	isDisabled: string;
+} >`
+	${ ( props ) =>
+		'true' === props.isDisabled &&
+		`
+		pointer-events: none;
+		opacity: 0.5;
+	` }
+`;
 
 export default function Radio( props: SelectControlProps ): JSX.Element {
 	const { control } = props;
-	const { label, options } = control || {};
+	const { options } = control || {};
 
 	return (
-		<RadioControl
-			label={
-				<Label { ...props } control={ control }>
-					{ label }
-				</Label>
-			}
+		<StyleRadioControl
+			label={ <Label { ...props } /> }
 			options={ options }
 			selected={ getValue( props ) }
 			onChange={ ( value: string ) => updateAttribute( value, props ) }
+			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+			className={ control?.className }
 		/>
 	);
 }

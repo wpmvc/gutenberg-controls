@@ -2,9 +2,11 @@ export interface Control {
 	type: string;
 	label: string;
 	condition?: ( attributes: object ) => boolean;
+	isDisabled?: boolean | ( ( attributes: object ) => boolean );
 	helpText?: string;
 	className?: string;
 	isResponsive?: boolean;
+	isPro?: boolean;
 }
 
 export interface SelectControl extends Control {
@@ -22,6 +24,7 @@ export interface ControlProps {
 	placement: 'left-start' | 'right-start';
 	offset?: number;
 	components: { [ key: string ]: any };
+	isProAvailable?: boolean;
 	// [ key: string ]: any;
 }
 
