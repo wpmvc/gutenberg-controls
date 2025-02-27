@@ -10,21 +10,22 @@ import { __ } from '@wordpress/i18n';
  */
 import { Control, ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
+import { memo } from 'react';
 
-interface SliderControl extends Control {
+type SliderControl = Control & {
 	max?: number;
 	min?: number;
-}
+};
 
-interface SliderControlProps extends ControlProps {
+type SliderControlProps = ControlProps & {
 	control: SliderControl;
-}
+};
 
-export default function Slider( props: SliderControlProps ) {
+const Slider = memo( ( props: SliderControlProps ) => {
 	const { control } = props;
 
-	const { max = 100, min = 0 } = control || {};
+	const { max = 100, min = 0 } = control;
 
 	return (
 		<RangeControl
@@ -38,4 +39,6 @@ export default function Slider( props: SliderControlProps ) {
 			className={ control?.className }
 		/>
 	);
-}
+}, memoCallback );
+
+export default Slider;

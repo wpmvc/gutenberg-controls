@@ -52,3 +52,15 @@ export function isDisabled( {
 
 	return !! control.isDisabled;
 }
+
+export function memoCallback(
+	prevProps: ControlProps,
+	nextProps: ControlProps
+): boolean {
+	return (
+		prevProps.attributes[ prevProps.attr_key ] ===
+			nextProps.attributes[ nextProps.attr_key ] &&
+		prevProps.device === nextProps.device &&
+		isDisabled( prevProps ) === isDisabled( nextProps )
+	);
+}

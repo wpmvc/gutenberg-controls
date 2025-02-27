@@ -10,14 +10,14 @@ import { PanelBody } from '@wordpress/components';
 import { Control, ControlProps } from '../types/control';
 import { PrivateControls } from '.';
 
-interface PanelControl extends Control {
+type PanelControl = Control & {
 	initialOpen?: boolean;
 	controls: Control[];
-}
+};
 
-interface PanelControlProps extends ControlProps {
+type PanelControlProps = ControlProps & {
 	control: PanelControl;
-}
+};
 
 export default function Panel( props: PanelControlProps ): JSX.Element {
 	const { control } = props;

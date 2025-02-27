@@ -23,14 +23,14 @@ import { Control, ControlProps } from '../types/control';
 /**
  * Types for the props of the Border component.
  */
-interface BorderControl extends Control {
+type BorderControl = Control & {
 	options?: string[];
 	insidePanel?: boolean;
-}
+};
 
-interface BorderControlProps extends ControlProps {
+type BorderControlProps = ControlProps & {
 	control: BorderControl;
-}
+};
 
 export default function Border( props: BorderControlProps ): JSX.Element {
 	const { attr_key, control, metaData, placement, offset } = props;

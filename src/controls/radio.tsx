@@ -3,10 +3,11 @@
  */
 //@ts-ignore
 import { RadioControl } from '@wordpress/components';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 import Label from '../components/label';
 import { SelectControlProps } from '../types/control';
 import styled from 'styled-components';
+import { memo } from 'react';
 
 const StyleRadioControl = styled( RadioControl )< {
 	isDisabled: string;
@@ -19,7 +20,7 @@ const StyleRadioControl = styled( RadioControl )< {
 	` }
 `;
 
-export default function Radio( props: SelectControlProps ): JSX.Element {
+const Radio = memo( ( props: SelectControlProps ) => {
 	const { control } = props;
 	const { options } = control || {};
 
@@ -33,4 +34,6 @@ export default function Radio( props: SelectControlProps ): JSX.Element {
 			className={ control?.className }
 		/>
 	);
-}
+}, memoCallback );
+
+export default Radio;

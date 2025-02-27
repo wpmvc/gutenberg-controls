@@ -1,33 +1,33 @@
-export interface Control {
+export type Control = {
 	type: string;
 	label: string;
-	condition?: ( attributes: object ) => boolean;
-	isDisabled?: boolean | ( ( attributes: object ) => boolean );
+	condition?: ( attributes: Record< string, any > ) => boolean;
+	isDisabled?: boolean | ( ( attributes: Record< string, any > ) => boolean );
 	helpText?: string;
 	className?: string;
 	isResponsive?: boolean;
 	isPro?: boolean;
-}
+};
 
-export interface SelectControl extends Control {
-	options: [ { label: string; value: string } ];
-}
+export type SelectControl = Control & {
+	options: Array< { label: string; value: string } >;
+	isMulti?: boolean;
+};
 
-export interface ControlProps {
+export type ControlProps = {
 	attr_key: string;
-	attributes: { [ key: string ]: any };
-	setAttributes: ( attributes: { [ key: string ]: any } ) => void;
+	attributes: Record< string, any >;
+	setAttributes: ( attributes: Record< string, any > ) => void;
 	device: 'desktop' | 'tablet' | 'mobile';
-	controls?: { [ key: string ]: any };
+	controls?: Record< string, any >;
 	control: Control;
-	metaData: { [ key: string ]: any };
+	metaData: Record< string, any >;
 	placement: 'left-start' | 'right-start';
 	offset?: number;
-	components: { [ key: string ]: any };
+	components: Record< string, any >;
 	isProAvailable?: boolean;
-	// [ key: string ]: any;
-}
+};
 
-export interface SelectControlProps extends ControlProps {
+export type SelectControlProps = ControlProps & {
 	control: SelectControl;
-}
+};

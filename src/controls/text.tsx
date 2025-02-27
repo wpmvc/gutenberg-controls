@@ -13,9 +13,10 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
  * Internal dependencies
  */
 import { ControlProps } from '../types/control';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 import Label from '../components/label';
 import styled from 'styled-components';
+import { memo } from 'react';
 
 // const StyledInput = styled( InputControl )< { isInvalid: boolean } >`
 // 	${ ( { isInvalid } ) =>
@@ -42,7 +43,7 @@ const StyledInputControl = styled( InputControl )< {
 	` }
 `;
 
-export default function Text( props: ControlProps ) {
+const Text = memo( ( props: ControlProps ) => {
 	const { control } = props;
 	const { helpText } = control || {};
 
@@ -57,4 +58,6 @@ export default function Text( props: ControlProps ) {
 			className={ control?.className }
 		/>
 	);
-}
+}, memoCallback );
+
+export default Text;

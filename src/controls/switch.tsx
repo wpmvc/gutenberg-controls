@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 //@ts-ignore
+import { memo } from 'react';
 import { ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -15,7 +16,7 @@ import styled from 'styled-components';
  */
 import { ControlProps } from '../types/control';
 import Label from '../components/label';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 
 // Styled ToggleControl component
 const StyledToggleControl = styled( ToggleControl )`
@@ -24,9 +25,8 @@ const StyledToggleControl = styled( ToggleControl )`
 	}
 `;
 
-export default function Switch( props: ControlProps ) {
+const Switch = memo( ( props: ControlProps ) => {
 	const { control } = props;
-
 	return (
 		<StyledToggleControl
 			label={ <Label { ...props } /> }
@@ -36,4 +36,6 @@ export default function Switch( props: ControlProps ) {
 			className={ control?.className }
 		/>
 	);
-}
+}, memoCallback );
+
+export default Switch;
