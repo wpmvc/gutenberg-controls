@@ -28,6 +28,7 @@ import Colors from './colors';
 import ToggleGroup from './toggle-group';
 import Repeater from './repeater';
 import Notice from './notice';
+import Tabs from './tabs';
 
 /**
  * Mapping of control types to their respective components
@@ -37,6 +38,7 @@ const defaultComponents: {
 	//@ts-ignore
 	[ key: string ]: ComponentType< ControlProps >;
 } = {
+	tabs: Tabs,
 	//@ts-ignore
 	color: PickColor,
 	colors: Colors,
@@ -123,7 +125,7 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
  * @returns {JSX.Element | null} Rendered control components or null
  */
 export default function Controls( props: ControlProps ): JSX.Element | null {
-	const { components } = props;
+	const { components = {} } = props;
 	return (
 		<PrivateControls
 			{ ...props }
