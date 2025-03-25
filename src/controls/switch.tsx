@@ -20,9 +20,9 @@ import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 
 // Styled ToggleControl component
 const StyledToggleControl = styled( ToggleControl )`
-	.components-toggle-control__label {
-		order: -1;
-	}
+	// .components-toggle-control__label {
+	// 	order: -1;
+	// }
 `;
 
 const Switch = memo( ( props: ControlProps ) => {

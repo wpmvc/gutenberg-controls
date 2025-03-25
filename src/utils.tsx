@@ -28,26 +28,29 @@ export function updateAttribute(
 		return;
 	}
 
-	const { attr_key, setAttributes, attributes, device } = controlProps;
+	const { attr_key, setAttributes, attributes, device, control } =
+		controlProps;
 
 	setAttributes( {
 		[ attr_key ]: isResponsive( controlProps )
 			? { ...attributes[ attr_key ], [ device as string ]: value }
 			: value,
 	} );
+
+	if ( control?.onChange ) {
+		control.onChange( controlProps );
+	}
 }
 
-export function isDisabled( {
-	control,
-	attributes,
-	isProAvailable,
-}: ControlProps ): boolean {
+export function isDisabled( controlProps: ControlProps ): boolean {
+	const { control, attributes, isProAvailable } = controlProps;
+
 	if ( !! control.isPro && ! isProAvailable ) {
 		return true;
 	}
 
 	if ( typeof control.isDisabled === 'function' ) {
-		return control.isDisabled( attributes );
+		return control.isDisabled( controlProps );
 	}
 
 	return !! control.isDisabled;

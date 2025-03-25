@@ -24,7 +24,9 @@ export default function Panel( props: PanelControlProps ): JSX.Element {
 	return (
 		<PanelBody
 			title={ control.label }
-			initialOpen={ control?.initialOpen ?? false }
+			initialOpen={
+				! control.label ? true : control?.initialOpen ?? false
+			}
 		>
 			<PrivateControls { ...props } controls={ control.controls } />
 		</PanelBody>

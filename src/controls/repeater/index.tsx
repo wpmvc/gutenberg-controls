@@ -66,7 +66,9 @@ interface Item {
 
 interface RepeaterControl extends Control {
 	fixed?: boolean;
-	title_field?: string;
+	allowDuplication?: boolean;
+	labelField?: string;
+	addButtonText?: boolean;
 	controls: Control[];
 }
 
@@ -223,7 +225,9 @@ export default function Repeater( props: RepeaterProps ) {
 							variant="primary"
 							size="small"
 						>
-							+ ADD ITEM
+							{ control?.addButtonText
+								? control.addButtonText
+								: '+ ADD ITEM' }
 						</Button>
 					</ButtonContainer>
 				) }
@@ -308,21 +312,24 @@ const SortableItem = memo(
 								padding: '9px 0px',
 							} }
 						>
-							{ item[ control?.title_field ?? 'defaultField' ] ??
+							{ item[ control?.labelField ?? 'defaultField' ] ??
 								`Item #${ item.id }` }
 						</span>
 					</ItemHeaderContent>
 					{ ! control?.fixed && (
 						<ItemHeaderActions className="header-actions">
-							<Action
-								onClick={ ( event ) => {
-									event.stopPropagation();
-									onDuplicate( item.id );
-								} }
-								className="copy"
-							>
-								<Copy size={ 16 } />
-							</Action>
+							{ ( undefined === control?.allowDuplication ||
+								control.allowDuplication ) && (
+								<Action
+									onClick={ ( event ) => {
+										event.stopPropagation();
+										onDuplicate( item.id );
+									} }
+									className="copy"
+								>
+									<Copy size={ 16 } />
+								</Action>
+							) }
 							<Action
 								onClick={ ( event ) => {
 									event.stopPropagation();
@@ -347,14 +354,24 @@ const SortableItem = memo(
 							{ ...repeaterProps }
 							attributes={ attribute[ itemIndex ] }
 							setAttributes={ ( newAttributes ) => {
-								const updatedAttributes = [ ...attribute ];
-								updatedAttributes[ itemIndex ] = {
-									...updatedAttributes[ itemIndex ],
+								const updatedValues = [ ...attribute ];
+
+								updatedValues[ itemIndex ] = {
+									...updatedValues[ itemIndex ],
 									...newAttributes,
 								};
+
 								setAttributes( {
-									[ attr_key ]: updatedAttributes,
+									[ attr_key ]: updatedValues,
 								} );
+
+								if ( control?.onChange ) {
+									control.onChange( {
+										...repeaterProps,
+										updatedValues,
+										repeaterIndex: itemIndex,
+									} );
+								}
 							} }
 							controls={ control.controls }
 						/>
