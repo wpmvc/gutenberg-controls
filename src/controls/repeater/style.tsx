@@ -35,11 +35,22 @@ export const ItemHeaderContent = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	flex: 1;
+	.repeater-item-label{
+		font-weight: 500;
+		color: #1e1e1e;
+		padding: 9px 9px 9px 0;
+		word-wrap: break-word;
+		word-break: break-word;
+		border-right: 1px solid #e0e0e0;
+		flex: 1;
+	}
 `;
 
 export const ItemHeaderActions = styled.div`
 	display: flex;
 	align-items: center;
+	flex: none;
 `;
 
 export const Input = styled.input`
@@ -76,11 +87,14 @@ export const ButtonBase = styled.div`
 
 export const SortButton = styled( ButtonBase )`
 	cursor: grab;
+	flex: none;
 `;
 
 export const Action = styled( ButtonBase )`
 	padding: 10px;
-	border-left: 1px solid #e0e0e0;
+	&.copy {
+		border-right: 1px solid #e0e0e0;
+	}
 `;
 
 export const Label = styled.div`
