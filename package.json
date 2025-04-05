@@ -18,17 +18,17 @@
     "npm": ">=10.2.3"
   },
   "keywords": [
-		"WordPress",
-		"editor",
-		"gutenberg",
-		"blocks",
-		"controls"
-	],
-	"homepage": "https://github.com/wpmvc/gutenberg-controls",
-	"repository": "git+https://github.com/wpmvc/gutenberg-controls.git",
-	"bugs": {
-		"url": "https://github.com/wpmvc/gutenberg-controls/issues"
-	},
+    "WordPress",
+    "editor",
+    "gutenberg",
+    "blocks",
+    "controls"
+  ],
+  "homepage": "https://github.com/wpmvc/gutenberg-controls",
+  "repository": "git+https://github.com/wpmvc/gutenberg-controls.git",
+  "bugs": {
+    "url": "https://github.com/wpmvc/gutenberg-controls/issues"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -53,5 +53,6 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.475.0",
     "styled-components": "^6.1.15"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

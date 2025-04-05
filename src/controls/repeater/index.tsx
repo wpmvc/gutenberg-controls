@@ -306,11 +306,7 @@ const SortableItem = memo(
 							<GripVertical size={ 16 } />
 						</SortButton>
 						<span
-							style={ {
-								fontWeight: 500,
-								color: '#1e1e1e',
-								padding: '9px 0px',
-							} }
+							className="repeater-item-label"
 						>
 							{ item[ control?.labelField ?? 'defaultField' ] ??
 								`Item #${ item.id }` }
