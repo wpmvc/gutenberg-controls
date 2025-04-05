@@ -92,6 +92,9 @@ export const SortButton = styled( ButtonBase )`
 
 export const Action = styled( ButtonBase )`
 	padding: 10px;
+	&.copy {
+		border-right: 1px solid #e0e0e0;
+	}
 `;
 
 export const Label = styled.div`
