@@ -10,6 +10,7 @@ export const ItemList = styled.div`
 	flex-direction: column;
 	gap: 6px;
 	overflow: auto;
+	max-height: 300px;
 `;
 
 export const ItemContainer = styled.div< { dragging: number } >`
