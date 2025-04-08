@@ -74,6 +74,7 @@ interface RepeaterControl extends Control {
 	addButtonText?: boolean;
 	preventEmpty?: boolean; // default: true
 	controls: Control[];
+	actions?: () => React.ReactElement;
 }
 
 interface RepeaterProps extends ControlProps {
@@ -368,7 +369,12 @@ const SortableItem = memo(
 							) }
 						</span>
 					</ItemHeaderContent>
-					{ ! control?.fixed && (
+					{ control?.actions && (
+						<ItemHeaderActions className="header-actions">
+							{ <control.actions /> }
+						</ItemHeaderActions>
+					) }
+					{ ! control?.fixed && ! control?.actions && (
 						<ItemHeaderActions className="header-actions">
 							{ ( undefined === control?.allowDuplication ||
 								control.allowDuplication ) && (
