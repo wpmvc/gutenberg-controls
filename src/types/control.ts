@@ -12,7 +12,7 @@ export type Control = {
 
 export type SelectControl = Control & {
 	options:
-		| Array< { label: string; value: string } >
+		| Array< { label: string; value: string; description?: string } >
 		| ( (
 				attributes: Record< string, any >
 		  ) => Array< { label: string; value: string } > );

@@ -19,6 +19,7 @@ import { getValue, isDisabled, updateAttribute } from '../utils';
  * External dependencies
  */
 import styled from 'styled-components';
+import { isFunction } from 'lodash';
 
 const StyledToggleGroup = styled( ToggleGroupControl )< {
 	isDisabled: string;
@@ -32,8 +33,12 @@ const StyledToggleGroup = styled( ToggleGroupControl )< {
 `;
 
 export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
-	const { control } = props;
-	const toggleOptions = control.options;
+	const { control, attributes } = props;
+	const { options } = control;
+
+	const toggleOptions = isFunction( options )
+		? options( attributes )
+		: options;
 
 	return (
 		<StyledToggleGroup

@@ -31,7 +31,6 @@ import { memo } from 'react';
 // 			}
 // 		` }
 // `;
-
 const StyledInputControl = styled( InputControl )< {
 	isDisabled: string;
 } >`
@@ -56,6 +55,7 @@ const Text = memo( ( props: ControlProps ) => {
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 			className={ control?.className }
+			onClick={ ( event: React.MouseEvent ) => event.stopPropagation() }
 		/>
 	);
 }, memoCallback );

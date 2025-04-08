@@ -36,7 +36,7 @@ export const ItemHeaderContent = styled.div`
 	align-items: center;
 	gap: 8px;
 	flex: 1;
-	.repeater-item-label{
+	.repeater-item-label {
 		font-weight: 500;
 		color: #1e1e1e;
 		padding: 9px 9px 9px 0;
@@ -108,6 +108,5 @@ export const Label = styled.div`
 
 export const ButtonContainer = styled.div`
 	display: flex;
-	justify-content: center;
 	margin-top: 12px;
 `;

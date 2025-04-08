@@ -8,6 +8,7 @@ import Label from '../components/label';
 import { SelectControlProps } from '../types/control';
 import styled from 'styled-components';
 import { memo } from 'react';
+import { isFunction } from 'lodash';
 
 const StyleRadioControl = styled( RadioControl )< {
 	isDisabled: string;
@@ -21,13 +22,13 @@ const StyleRadioControl = styled( RadioControl )< {
 `;
 
 const Radio = memo( ( props: SelectControlProps ) => {
-	const { control } = props;
+	const { control, attributes } = props;
 	const { options } = control || {};
 
 	return (
 		<StyleRadioControl
 			label={ <Label { ...props } /> }
-			options={ options }
+			options={ isFunction( options ) ? options( attributes ) : options }
 			selected={ getValue( props ) }
 			onChange={ ( value: string ) => updateAttribute( value, props ) }
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }

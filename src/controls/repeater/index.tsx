@@ -15,7 +15,7 @@ import {
 	useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { X, Copy, GripVertical } from 'lucide-react';
+import { Icon, copy, trash } from '@wordpress/icons';
 import {
 	restrictToVerticalAxis,
 	restrictToWindowEdges,
@@ -25,7 +25,7 @@ import {
 import { Button } from '@wordpress/components';
 import { Control, ControlProps } from '../../types/control';
 import { PrivateControls } from '..';
-import { findIndex, isEmpty } from 'lodash';
+import { findIndex, fromPairs, isEmpty, keys, toPairs } from 'lodash';
 
 import {
 	Action,
@@ -40,6 +40,7 @@ import {
 	SortButton,
 } from './style';
 import Label from '../../components/label';
+import clsx from 'clsx';
 /**
  * Represents an item in the repeater list.
  * @interface Item
@@ -67,8 +68,11 @@ interface Item {
 interface RepeaterControl extends Control {
 	fixed?: boolean;
 	allowDuplication?: boolean;
+	hideLabel?: boolean;
+	showControlInHeader?: boolean;
 	labelField?: string;
 	addButtonText?: boolean;
+	preventEmpty?: boolean; // default: true
 	controls: Control[];
 }
 
@@ -134,18 +138,25 @@ export default function Repeater( props: RepeaterProps ) {
 		setAttributes( { [ attr_key ]: newAttributes } );
 	}, [ attribute, setAttributes, attr_key ] );
 
+	const isDisabledRemove =
+		( undefined === control?.preventEmpty || control.preventEmpty ) &&
+		attribute.length === 1;
+
 	/**
 	 * Removes an item from the repeater list by its ID.
 	 * @param {number} id - The ID of the item to remove.
 	 */
 	const removeItem = useCallback(
 		( id: number ) => {
+			if ( isDisabledRemove ) {
+				return;
+			}
 			const newAttributes = attribute.filter(
 				( item: Item ) => item.id !== id
 			);
 			setAttributes( { [ attr_key ]: newAttributes } );
 		},
-		[ attribute, setAttributes, attr_key ]
+		[ attribute, setAttributes, attr_key, isDisabledRemove ]
 	);
 
 	/**
@@ -213,6 +224,7 @@ export default function Repeater( props: RepeaterProps ) {
 									onRemove={ removeItem }
 									onDuplicate={ duplicateItem }
 									onToggleCollapse={ toggleCollapse }
+									isDisabledRemove={ isDisabledRemove }
 								/>
 							) ) }
 						</ItemList>
@@ -222,7 +234,7 @@ export default function Repeater( props: RepeaterProps ) {
 					<ButtonContainer className="repeater-button-container">
 						<Button
 							onClick={ addItem }
-							variant="primary"
+							variant="tertiary"
 							size="small"
 						>
 							{ control?.addButtonText
@@ -251,6 +263,7 @@ interface SortableItemProps {
 	onDuplicate: ( id: number ) => void;
 	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterProps;
+	isDisabledRemove: boolean;
 }
 
 /**
@@ -266,6 +279,7 @@ const SortableItem = memo(
 		onDuplicate,
 		onToggleCollapse,
 		repeaterProps,
+		isDisabledRemove,
 	}: SortableItemProps ) => {
 		const {
 			attributes: dragAttributes,
@@ -279,6 +293,39 @@ const SortableItem = memo(
 		const { attr_key, attributes, control, setAttributes } = repeaterProps;
 		const attribute = attributes[ attr_key ];
 		const itemIndex = findIndex( attribute, { id: item.id } );
+
+		const updateAttributes = ( newAttributes: any ) => {
+			const updatedValues = [ ...attribute ];
+			updatedValues[ itemIndex ] = {
+				...updatedValues[ itemIndex ],
+				...newAttributes,
+			};
+			setAttributes( { [ attr_key ]: updatedValues } );
+
+			if ( control?.onChange ) {
+				control.onChange( {
+					...repeaterProps,
+					updatedValues,
+					repeaterIndex: itemIndex,
+				} );
+			}
+		};
+
+		const splitControls = ( controls: Record< string, any > ) => {
+			const [ firstKey, ...restKeys ] = keys( controls );
+			return control?.showControlInHeader
+				? {
+						headerControls: { [ firstKey ]: controls[ firstKey ] },
+						bodyControls: fromPairs(
+							toPairs( controls ).slice( 1 )
+						),
+				  }
+				: { headerControls: {}, bodyControls: controls };
+		};
+
+		const { headerControls, bodyControls } = splitControls(
+			control.controls as Record< string, any >
+		);
 
 		return (
 			<ItemContainer
@@ -303,13 +350,22 @@ const SortableItem = memo(
 							{ ...dragAttributes }
 							className="repeater-sort-button"
 						>
-							<GripVertical size={ 16 } />
+							<span className="dashicons dashicons-move"></span>
 						</SortButton>
-						<span
-							className="repeater-item-label"
-						>
-							{ item[ control?.labelField ?? 'defaultField' ] ??
-								`Item #${ item.id }` }
+						<span className="repeater-item-label">
+							{ ! control?.hideLabel &&
+								( item[
+									control?.labelField ?? 'defaultField'
+								] ??
+									`Item #${ item.id }` ) }
+							{ control?.showControlInHeader && (
+								<PrivateControls
+									{ ...repeaterProps }
+									attributes={ attribute[ itemIndex ] }
+									setAttributes={ updateAttributes }
+									controls={ headerControls }
+								/>
+							) }
 						</span>
 					</ItemHeaderContent>
 					{ ! control?.fixed && (
@@ -323,7 +379,7 @@ const SortableItem = memo(
 									} }
 									className="copy"
 								>
-									<Copy size={ 16 } />
+									<Icon icon={ copy } />
 								</Action>
 							) }
 							<Action
@@ -331,14 +387,16 @@ const SortableItem = memo(
 									event.stopPropagation();
 									onRemove( item.id );
 								} }
-								className="remove"
+								className={ clsx( 'remove', {
+									disabled: isDisabledRemove,
+								} ) }
 							>
-								<X size={ 16 } />
+								<Icon icon={ trash } />
 							</Action>
 						</ItemHeaderActions>
 					) }
 				</ItemHeader>
-				{ ! isEmpty( control.controls ) && ! item.collapsed && (
+				{ ! isEmpty( bodyControls ) && ! item.collapsed && (
 					<div
 						style={ {
 							padding: 10,
@@ -349,27 +407,8 @@ const SortableItem = memo(
 						<PrivateControls
 							{ ...repeaterProps }
 							attributes={ attribute[ itemIndex ] }
-							setAttributes={ ( newAttributes ) => {
-								const updatedValues = [ ...attribute ];
-
-								updatedValues[ itemIndex ] = {
-									...updatedValues[ itemIndex ],
-									...newAttributes,
-								};
-
-								setAttributes( {
-									[ attr_key ]: updatedValues,
-								} );
-
-								if ( control?.onChange ) {
-									control.onChange( {
-										...repeaterProps,
-										updatedValues,
-										repeaterIndex: itemIndex,
-									} );
-								}
-							} }
-							controls={ control.controls }
+							setAttributes={ updateAttributes }
+							controls={ bodyControls }
 						/>
 					</div>
 				) }
