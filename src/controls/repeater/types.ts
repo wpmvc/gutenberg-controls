@@ -22,6 +22,7 @@ export interface RepeaterControl extends Control {
 	preventEmpty?: boolean; // default: true
 	controls: Control[];
 	actions?: () => React.ReactElement;
+	className?: string;
 }
 
 export interface RepeaterProps extends ControlProps {

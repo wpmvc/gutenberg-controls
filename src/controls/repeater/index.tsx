@@ -122,7 +122,11 @@ export default function Repeater( props: RepeaterProps ) {
 	);
 
 	return (
-		<div className="components-base-control wpmvc-repeater-wrapper">
+		<div
+			className={ `components-base-control wpmvc-repeater-wrapper ${
+				control?.className ?? ''
+			}` }
+		>
 			<StyledLabel className="repeater-label">
 				<Label { ...props } />
 			</StyledLabel>
