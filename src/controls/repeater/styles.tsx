@@ -13,23 +13,27 @@ export const ItemList = styled.div`
 	max-height: 300px;
 `;
 
-export const ItemContainer = styled.div< { dragging: number } >`
+export const ItemContainer = styled.div< { $dragging: number } >`
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	background: #fff;
 	border: 1px solid #e0e0e0;
-	z-index: ${ ( props ) => ( props.dragging ? 999 : 1 ) };
+	z-index: ${ ( props ) => ( props.$dragging ? 999 : 1 ) };
 	transition: all 0.2s ease;
 `;
 
-export const ItemHeader = styled.div< { fixed: string } >`
+export const ItemHeader = styled.div< { $fixed: string } >`
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	z-index: ${ ( props ) =>
-		'true' === props.fixed ? 'inherit' : 'pointer' };
+		'true' === props.$fixed ? 'inherit' : 'pointer' };
+	&.repeater-header--has-clone{
+		.repeater-item-label{
+			width: 102px;
+		}
+	}
 `;
 
 export const ItemHeaderContent = styled.div`
@@ -43,14 +47,16 @@ export const ItemHeaderContent = styled.div`
 		padding: 9px 9px 9px 0;
 		word-wrap: break-word;
 		word-break: break-word;
-		border-right: 1px solid #e0e0e0;
 		flex: 1;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 145px;
 	}
 `;
 
 export const ItemHeaderActions = styled.div`
 	display: flex;
-	align-items: center;
 	flex: none;
 `;
 
@@ -94,7 +100,10 @@ export const SortButton = styled( ButtonBase )`
 export const Action = styled( ButtonBase )`
 	padding: 10px;
 	&.copy {
-		border-right: 1px solid #e0e0e0;
+		border-left: 1px solid #e0e0e0;
+	}
+	&.remove{
+		border-left: 1px solid #e0e0e0;
 	}
 `;
 
