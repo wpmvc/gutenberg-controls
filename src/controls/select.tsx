@@ -26,6 +26,7 @@ export default function Select( props: SelectControlProps ) {
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			disabled={ isDisabled( props ) }
 			className={ control?.className }
+			__nextHasNoMarginBottom
 		/>
 	);
 }

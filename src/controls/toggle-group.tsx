@@ -50,6 +50,7 @@ export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 			size="__unstable-large"
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 			className={ control?.className }
+			__nextHasNoMarginBottom
 		>
 			{ toggleOptions.map( ( option: any, index: any ) => {
 				return (

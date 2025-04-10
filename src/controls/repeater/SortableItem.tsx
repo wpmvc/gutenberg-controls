@@ -3,6 +3,7 @@
  */
 import { memo } from '@wordpress/element';
 import { Icon, copy, trash } from '@wordpress/icons';
+import { Tooltip } from '@wordpress/components';
 
 /**
  * External dependencies
@@ -77,13 +78,17 @@ const SortableItem = ( {
 				transform: CSS.Transform.toString( transform ),
 				transition,
 			} }
-			dragging={ isDragging ? 1 : 0 }
-			className="repeater-item"
+			$dragging={ isDragging ? 1 : 0 }
+			className={ clsx( 'repeater-item', {
+				'repeater-item--compact': control?.showControlInHeader
+			} ) }
 		>
 			<ItemHeader
-				fixed={ control?.fixed ? control.fixed.toString() : 'false' }
+				$fixed={ control?.fixed ? control.fixed.toString() : 'false' }
 				onClick={ () => onToggleCollapse( item.id ) }
-				className="repeater-header"
+				className={ clsx( 'repeater-header', {
+					'repeater-header--has-clone': control?.allowDuplication === undefined || control?.allowDuplication,
+				} ) }
 			>
 				<ItemHeaderContent className="repeater-header-content">
 					<SortButton
@@ -109,34 +114,48 @@ const SortableItem = ( {
 				</ItemHeaderContent>
 				{ control?.actions && (
 					<ItemHeaderActions className="header-actions">
-						{ <control.actions /> }
+						<Action className='edit'>
+							<control.actions />
+						</Action>
 					</ItemHeaderActions>
 				) }
 				{ ! control?.fixed && ! control?.actions && (
 					<ItemHeaderActions className="header-actions">
 						{ ( undefined === control?.allowDuplication ||
 							control.allowDuplication ) && (
+							<Tooltip
+								text={ control?.showActionTooltip ? 'Duplicate Item' : '' }
+								delay={ 0 }
+							>
+								<Action
+									onClick={ ( event ) => {
+										event.stopPropagation();
+										onDuplicate( item.id );
+									} }
+									className="copy"
+								>
+									<Icon icon={ copy } />
+								</Action>
+							</Tooltip>
+						) }
+						<Tooltip
+							text={ control?.showActionTooltip && ! isDisabledRemove ? 'Delete Item' : '' }
+							delay={ 0 }
+							placement="bottom-end"
+							className="tooltip-bottom-end"
+						>
 							<Action
 								onClick={ ( event ) => {
 									event.stopPropagation();
-									onDuplicate( item.id );
+									onRemove( item.id );
 								} }
-								className="copy"
+								className={ clsx( 'remove', {
+									disabled: isDisabledRemove,
+								} ) }
 							>
-								<Icon icon={ copy } />
+								<Icon icon={ trash } />
 							</Action>
-						) }
-						<Action
-							onClick={ ( event ) => {
-								event.stopPropagation();
-								onRemove( item.id );
-							} }
-							className={ clsx( 'remove', {
-								disabled: isDisabledRemove,
-							} ) }
-						>
-							<Icon icon={ trash } />
-						</Action>
+						</Tooltip>
 					</ItemHeaderActions>
 				) }
 			</ItemHeader>
