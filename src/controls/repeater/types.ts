@@ -23,6 +23,7 @@ export interface RepeaterControl extends Control {
 	controls: Control[];
 	actions?: () => React.ReactElement;
 	className?: string;
+	showActionTooltip?: boolean;
 }
 
 export interface RepeaterProps extends ControlProps {
