@@ -80,14 +80,16 @@ const SortableItem = ( {
 			} }
 			$dragging={ isDragging ? 1 : 0 }
 			className={ clsx( 'repeater-item', {
-				'repeater-item--compact': control?.showControlInHeader
+				'repeater-item--compact': control?.showControlInHeader,
 			} ) }
 		>
 			<ItemHeader
 				$fixed={ control?.fixed ? control.fixed.toString() : 'false' }
 				onClick={ () => onToggleCollapse( item.id ) }
 				className={ clsx( 'repeater-header', {
-					'repeater-header--has-clone': control?.allowDuplication === undefined || control?.allowDuplication,
+					'repeater-header--has-clone':
+						control?.allowDuplication === undefined ||
+						control?.allowDuplication,
 				} ) }
 			>
 				<ItemHeaderContent className="repeater-header-content">
@@ -114,7 +116,7 @@ const SortableItem = ( {
 				</ItemHeaderContent>
 				{ control?.actions && (
 					<ItemHeaderActions className="header-actions">
-						<Action className='edit'>
+						<Action className="edit">
 							<control.actions />
 						</Action>
 					</ItemHeaderActions>
@@ -124,7 +126,11 @@ const SortableItem = ( {
 						{ ( undefined === control?.allowDuplication ||
 							control.allowDuplication ) && (
 							<Tooltip
-								text={ control?.showActionTooltip ? 'Duplicate Item' : '' }
+								text={
+									control?.showActionTooltip
+										? 'Duplicate Item'
+										: ''
+								}
 								delay={ 0 }
 							>
 								<Action
@@ -139,7 +145,11 @@ const SortableItem = ( {
 							</Tooltip>
 						) }
 						<Tooltip
-							text={ control?.showActionTooltip && ! isDisabledRemove ? 'Delete Item' : '' }
+							text={
+								control?.showActionTooltip && ! isDisabledRemove
+									? 'Delete Item'
+									: ''
+							}
 							delay={ 0 }
 							placement="bottom-end"
 							className="tooltip-bottom-end"

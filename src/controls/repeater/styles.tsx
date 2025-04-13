@@ -29,8 +29,8 @@ export const ItemHeader = styled.div< { $fixed: string } >`
 	width: 100%;
 	z-index: ${ ( props ) =>
 		'true' === props.$fixed ? 'inherit' : 'pointer' };
-	&.repeater-header--has-clone{
-		.repeater-item-label{
+	&.repeater-header--has-clone {
+		.repeater-item-label {
 			width: 102px;
 		}
 	}
@@ -102,7 +102,7 @@ export const Action = styled( ButtonBase )`
 	&.copy {
 		border-left: 1px solid #e0e0e0;
 	}
-	&.remove{
+	&.remove {
 		border-left: 1px solid #e0e0e0;
 	}
 `;

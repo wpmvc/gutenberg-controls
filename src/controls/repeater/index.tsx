@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useCallback } from '@wordpress/element';
+import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 
 /**
@@ -44,6 +44,8 @@ import {
 export default function Repeater( props: RepeaterProps ) {
 	const { control, attributes, attr_key, setAttributes } = props;
 	const attribute = attributes[ attr_key ];
+	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
+	const [ newItemAdded, setNewItemAdded ] = useState( false );
 
 	const sensors = useSensors(
 		useSensor( PointerSensor ),
@@ -66,6 +68,17 @@ export default function Repeater( props: RepeaterProps ) {
 		[ attribute, setAttributes, attr_key ]
 	);
 
+	useEffect( () => {
+		if ( newItemAdded && itemListRef.current ) {
+			// Scroll to bottom of the list
+			itemListRef.current.scrollTo( {
+				top: itemListRef.current.scrollHeight,
+				behavior: 'smooth',
+			} );
+			setNewItemAdded( false );
+		}
+	}, [ attribute, newItemAdded ] );
+
 	const addItem = useCallback( () => {
 		const newItem = {
 			id: getMaxId( attribute ) + 1,
@@ -75,6 +88,7 @@ export default function Repeater( props: RepeaterProps ) {
 		};
 		const newAttributes = [ ...attribute, newItem ];
 		setAttributes( { [ attr_key ]: newAttributes } );
+		setNewItemAdded( true );
 	}, [ attribute, setAttributes, attr_key ] );
 
 	const isDisabledRemove =
@@ -145,7 +159,10 @@ export default function Repeater( props: RepeaterProps ) {
 						items={ attribute }
 						strategy={ verticalListSortingStrategy }
 					>
-						<ItemList className="repeater-item-list">
+						<ItemList
+							className="repeater-item-list"
+							ref={ itemListRef }
+						>
 							{ attribute.map( ( item: Item ) => (
 								<SortableItem
 									key={ item.id }
