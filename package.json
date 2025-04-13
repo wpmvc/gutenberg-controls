@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/gutenberg-controls",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "build/gutenberg-controls.umd.js",
   "module": "build/gutenberg-controls.es.js",
   "types": "build-types/types/index.d.ts",
