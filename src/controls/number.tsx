@@ -18,6 +18,8 @@ const StyledBlockEditorControl = styled.div`
 
 type NumberControl = Control & {
 	precision?: boolean;
+	min?: number;
+	max?: number;
 };
 
 type NumberControlProps = ControlProps & {
@@ -50,6 +52,8 @@ export default function Number( props: NumberControlProps ): JSX.Element {
 				onChange={ handleChange }
 				disabled={ isDisabled( props ) }
 				className={ control?.className }
+				min={ control?.min }
+				max={ control?.max }
 			/>
 		</StyledBlockEditorControl>
 	);
