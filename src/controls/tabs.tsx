@@ -37,8 +37,9 @@ const StyledTabPanel = styled( TabPanel )< {
 		}
 
 		.components-button {
+			display: block;
 			flex: 1;
-			height: auto;
+			height: auto !important;
 			padding: 15px;
 			border-right: 1px solid #d6d9dd;
 
