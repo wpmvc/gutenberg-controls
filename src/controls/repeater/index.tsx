@@ -83,7 +83,7 @@ export default function Repeater( props: RepeaterProps ) {
 		const newItem = {
 			id: getMaxId( attribute ) + 1,
 			label: 'New Item',
-			value: 'New Value',
+			value: Date.now(),
 			collapsed: true,
 		};
 		const newAttributes = [ ...attribute, newItem ];
