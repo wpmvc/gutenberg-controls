@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/gutenberg-controls",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "main": "build/gutenberg-controls.umd.js",
   "module": "build/gutenberg-controls.es.js",
