@@ -37,6 +37,7 @@ const Slider = memo( ( props: SliderControlProps ) => {
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			disabled={ isDisabled( props ) }
 			className={ control?.className }
+			required={ control?.required }
 		/>
 	);
 }, memoCallback );

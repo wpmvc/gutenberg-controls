@@ -37,6 +37,7 @@ export default function Height( props: ControlProps ): JSX.Element {
 				onChange={ ( value: any ) => updateAttribute( value, props ) }
 				isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 				className={ control?.className }
+				required={ control?.required }
 			/>
 		</StyledBlockEditorControl>
 	);

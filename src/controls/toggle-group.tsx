@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { SelectControlProps } from '../types/control';
+import { ToggleGroupControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, isDisabled, updateAttribute } from '../utils';
 
@@ -32,9 +32,11 @@ const StyledToggleGroup = styled( ToggleGroupControl )< {
 	` }
 `;
 
-export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
+export default function ToggleGroup(
+	props: ToggleGroupControlProps
+): JSX.Element {
 	const { control, attributes } = props;
-	const { options } = control;
+	const { options, helpText } = control;
 
 	const toggleOptions = isFunction( options )
 		? options( attributes )
@@ -44,6 +46,7 @@ export default function ToggleGroup( props: SelectControlProps ): JSX.Element {
 		<StyledToggleGroup
 			//@ts-ignore
 			label={ <Label { ...props } /> }
+			help={ helpText }
 			isBlock
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }

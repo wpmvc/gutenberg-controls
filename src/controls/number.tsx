@@ -54,6 +54,7 @@ export default function Number( props: NumberControlProps ): JSX.Element {
 				className={ control?.className }
 				min={ control?.min }
 				max={ control?.max }
+				required={ control?.required }
 			/>
 		</StyledBlockEditorControl>
 	);

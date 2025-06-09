@@ -7,12 +7,12 @@ import { PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { Control, ControlProps } from '../types/control';
+import { Control, ControlProps, ControlsType } from '../types/control';
 import { PrivateControls } from '.';
 
 type PanelControl = Control & {
 	initialOpen?: boolean;
-	controls: Control[];
+	controls: ControlsType;
 };
 
 type PanelControlProps = ControlProps & {

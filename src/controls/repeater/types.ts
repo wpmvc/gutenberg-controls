@@ -6,13 +6,13 @@ import { Control, ControlProps } from '../../types/control';
 /**
  * Represents an item in the repeater list.
  */
-export interface Item {
+export type Item = {
 	id: number;
 	collapsed: boolean;
 	[ key: string ]: any;
 }
 
-export interface RepeaterControl extends Control {
+export type RepeaterControl = Control & {
 	fixed?: boolean;
 	allowDuplication?: boolean;
 	hideLabel?: boolean;
@@ -26,12 +26,12 @@ export interface RepeaterControl extends Control {
 	showActionTooltip?: boolean;
 }
 
-export interface RepeaterProps extends ControlProps {
+export type RepeaterProps = ControlProps & {
 	control: RepeaterControl;
 	[ key: string ]: any;
 }
 
-export interface SortableItemProps {
+export type SortableItemProps = {
 	item: Item;
 	onRemove: ( id: number ) => void;
 	onDuplicate: ( id: number ) => void;

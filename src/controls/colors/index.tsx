@@ -23,14 +23,14 @@ import Popover from './popover';
 import Indicator from './indicator';
 import { Control, ControlProps } from '../../types/control';
 
-interface ColorsControl extends Control {
+type ColorsControl = Control & {
 	items: { [ key: string ]: any };
 	insidePanel?: boolean;
-}
+};
 
-interface ColorsControlProps extends ControlProps {
+type ColorsControlProps = ControlProps & {
 	control: ColorsControl;
-}
+};
 
 export default function Colors( {
 	attr_key,

@@ -34,6 +34,7 @@ export default function Checkbox( props: ControlProps ): JSX.Element {
 			checked={ getValue( props ) }
 			onChange={ ( value: boolean ) => updateAttribute( value, props ) }
 			className={ control?.className }
+			required={ control?.required }
 		/>
 	);
 }

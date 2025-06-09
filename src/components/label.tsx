@@ -7,7 +7,7 @@ import { ControlProps } from '../types/control';
 import { DropdownOption } from '@wordpress/components/build-types/dropdown-menu/types';
 import ProBadge from './pro-badge';
 
-interface ResponsiveProps {
+type ResponsiveProps = {
 	device: 'desktop' | 'tablet' | 'mobile';
 	onChangeDevice?: ( device: 'desktop' | 'tablet' | 'mobile' ) => void;
 }

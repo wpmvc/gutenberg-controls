@@ -49,12 +49,13 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@wordpress/block-editor": "^14.19.0",
     "@wordpress/components": "^29.4.0",
     "@wordpress/element": "^6.18.0",
+    "@wordpress/i18n": "^5.24.0",
     "@wordpress/icons": "^10.21.0",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "styled-components": "^6.1.15"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

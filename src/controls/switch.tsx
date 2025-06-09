@@ -34,6 +34,7 @@ const Switch = memo( ( props: ControlProps ) => {
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			disabled={ isDisabled( props ) }
 			className={ control?.className }
+			required={ control?.required }
 			__nextHasNoMarginBottom
 		/>
 	);

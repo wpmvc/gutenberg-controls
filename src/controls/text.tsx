@@ -56,6 +56,7 @@ const Text = memo( ( props: ControlProps ) => {
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 			className={ control?.className }
 			onClick={ ( event: React.MouseEvent ) => event.stopPropagation() }
+			required={ control?.required }
 		/>
 	);
 }, memoCallback );
