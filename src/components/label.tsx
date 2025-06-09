@@ -77,7 +77,7 @@ const StyledLabel = styled.span`
 	font-size: 11px;
 	font-weight: 500;
 	line-height: 1.4;
-	text-transform: uppercase;
+	// text-transform: uppercase;
 	margin-bottom: 8px;
 	padding: 0px;
 `;

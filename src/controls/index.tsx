@@ -29,6 +29,8 @@ import ToggleGroup from './toggle-group';
 import Repeater from './repeater';
 import Notice from './notice';
 import Tabs from './tabs';
+import styled from 'styled-components';
+import Group from './group';
 
 /**
  * Mapping of control types to their respective components
@@ -41,6 +43,7 @@ const defaultComponents: {
 	tabs: Tabs,
 	color: PickColor,
 	colors: Colors,
+	group: Group,
 	checkbox: Checkbox,
 	border: Border,
 	dimension: Dimension,
@@ -53,9 +56,15 @@ const defaultComponents: {
 	slider: Slider,
 	switch: Switch,
 	text: Text,
-	toggle_group: ToggleGroup,
+	toggleGroup: ToggleGroup,
 	repeater: Repeater,
 };
+
+const StyledControls = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+`;
 
 /**
  * PrivateControls component that dynamically renders various control components
@@ -108,7 +117,7 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
 					<ControlView
 						{ ...props }
 						key={ key } // Use control key for each component to ensure uniqueness
-						attr_key={ key }
+						attrKey={ key }
 						control={ control }
 						attributes={ attributes }
 					/>
@@ -127,10 +136,12 @@ export default function Controls(
 ): JSX.Element | null {
 	const { components = {} } = props;
 	return (
-		//@ts-ignore
-		<PrivateControls
-			{ ...props }
-			components={ { ...defaultComponents, ...components } }
-		/>
+		<StyledControls>
+			{ /* @ts-ignore */ }
+			<PrivateControls
+				{ ...props }
+				components={ { ...defaultComponents, ...components } }
+			/>
+		</StyledControls>
 	);
 }

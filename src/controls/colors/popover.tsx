@@ -13,7 +13,7 @@ import TabPanel from './style';
 
 export default function Popover( {
 	element,
-	attr_key,
+	attrKey,
 	attributes,
 	setAttributes,
 	elementColors,
@@ -38,8 +38,8 @@ export default function Popover( {
 
 	const onChange = ( colorKey: any, value: any ) => {
 		setAttributes( {
-			[ attr_key ]: {
-				...attributes[ attr_key ],
+			[ attrKey ]: {
+				...attributes[ attrKey ],
 				[ element.name ]: {
 					...elementColors,
 					[ colorKey ]: value ?? '',

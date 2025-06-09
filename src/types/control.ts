@@ -6,6 +6,7 @@ import {
 	ColorsControlProps,
 	ColorsControlType,
 } from '../controls/colors/types';
+import { GroupControlProps, GroupControlType } from '../controls/group/types';
 import {
 	NoticeControlProps,
 	NoticeControlType,
@@ -41,6 +42,7 @@ export type ControlType =
 	| 'colors'
 	| 'checkbox'
 	| 'border'
+	| 'group'
 	| 'dimension'
 	| 'height'
 	| 'notice'
@@ -51,10 +53,10 @@ export type ControlType =
 	| 'slider'
 	| 'switch'
 	| 'text'
-	| 'toggle_group'
+	| 'toggleGroup'
 	| 'repeater';
 
-// Options type used for select, radio, toggle_group
+// Options type used for select, radio, toggleGroup
 export type Options =
 	| Array< { label: string; value: string; description?: string } >
 	| ( (
@@ -92,6 +94,7 @@ export type OtherControlType = BaseControl & {
 export type Control =
 	| BorderControlType
 	| ColorsControlType
+	| GroupControlType
 	| NoticeControlType
 	| NumberControlType
 	| PanelControlType
@@ -120,7 +123,7 @@ export type ControlRootProps = {
 };
 // Props shared across all controls
 export type BaseControlProps = ControlRootProps & {
-	attr_key: string;
+	attrKey: string;
 	control: Record< string, any >;
 	components: Record< string, any >;
 };
@@ -134,6 +137,7 @@ export type ControlProps =
 	| BaseControlProps
 	| BorderControlProps
 	| ColorsControlProps
+	| GroupControlProps
 	| NoticeControlProps
 	| NumberControlProps
 	| PanelControlProps

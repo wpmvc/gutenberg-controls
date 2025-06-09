@@ -4,7 +4,7 @@ import { useViewportMatch } from '@wordpress/compose';
 import { CommonControlProps } from '../types/control';
 
 export default function PickColor( {
-	attr_key,
+	attrKey,
 	control,
 	attributes,
 	setAttributes,
@@ -36,20 +36,20 @@ export default function PickColor( {
 						className="formgent-control-color-picker-trigger"
 					>
 						<span className="formgent-control-color-picker-value">
-							{ attributes[ attr_key ] }
+							{ attributes[ attrKey ] }
 						</span>
 						<span
 							className="formgent-control-color-picker-color"
-							style={ { background: attributes[ attr_key ] } }
+							style={ { background: attributes[ attrKey ] } }
 						></span>
 					</Button>
 				) }
 				renderContent={ () => (
 					<div className="formgent-control-color-picker-input">
 						<ColorPicker
-							color={ attributes[ attr_key ] }
+							color={ attributes[ attrKey ] }
 							onChange={ ( value: string ) => {
-								setAttributes( { [ attr_key ]: value } );
+								setAttributes( { [ attrKey ]: value } );
 							} }
 						/>
 					</div>

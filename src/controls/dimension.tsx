@@ -25,12 +25,12 @@ const StyledBoxControl = styled( BoxControl )< {
 `;
 
 export default function Dimension( props: CommonControlProps ): JSX.Element {
-	const { attr_key, control, attributes, setAttributes } = props;
-	const [ values, setValues ] = useState< any >( attributes[ attr_key ] );
+	const { attrKey, control, attributes, setAttributes } = props;
+	const [ values, setValues ] = useState< any >( attributes[ attrKey ] );
 
 	const handleChange = ( value: any ) => {
 		setValues( value );
-		setAttributes( { [ attr_key ]: value } );
+		setAttributes( { [ attrKey ]: value } );
 	};
 
 	return (

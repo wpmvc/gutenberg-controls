@@ -13,15 +13,15 @@ export function getValue(
 	controlProps: ControlProps,
 	defaultValue: any = undefined
 ): any {
-	const { attr_key, attributes, device } = controlProps;
+	const { attrKey, attributes, device } = controlProps;
 	// @ts-ignore
 	if ( isResponsive( controlProps ) ) {
 		if ( device !== undefined && device !== null ) {
-			return attributes[ attr_key ]?.[ device ] ?? defaultValue;
+			return attributes[ attrKey ]?.[ device ] ?? defaultValue;
 		}
 		return defaultValue;
 	}
-	return attributes[ attr_key ];
+	return attributes[ attrKey ];
 }
 
 export function updateAttribute(
@@ -32,12 +32,12 @@ export function updateAttribute(
 		return;
 	}
 
-	const { attr_key, setAttributes, attributes, device, control } =
+	const { attrKey, setAttributes, attributes, device, control } =
 		controlProps;
 
 	setAttributes( {
-		[ attr_key ]: isResponsive( controlProps )
-			? { ...attributes[ attr_key ], [ device as string ]: value }
+		[ attrKey ]: isResponsive( controlProps )
+			? { ...attributes[ attrKey ], [ device as string ]: value }
 			: value,
 	} );
 
@@ -71,8 +71,8 @@ export function memoCallback(
 	nextProps: ControlProps
 ): boolean {
 	return (
-		prevProps.attributes[ prevProps.attr_key ] ===
-			nextProps.attributes[ nextProps.attr_key ] &&
+		prevProps.attributes[ prevProps.attrKey ] ===
+			nextProps.attributes[ nextProps.attrKey ] &&
 		prevProps.device === nextProps.device &&
 		isDisabled( prevProps ) === isDisabled( nextProps )
 	);

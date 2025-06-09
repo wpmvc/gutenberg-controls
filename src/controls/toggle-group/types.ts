@@ -1,7 +1,7 @@
 import { BaseControl, BaseControlProps, Options } from '../../types/control';
 
 export type ToggleGroupControlType = BaseControl & {
-	type: 'toggle_group';
+	type: 'toggleGroup';
 	options: Options;
 };
 

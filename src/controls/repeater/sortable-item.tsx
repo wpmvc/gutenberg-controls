@@ -45,8 +45,8 @@ const SortableItem = ( {
 		isDragging,
 	} = useSortable( { id: item.id } );
 
-	const { attr_key, attributes, control, setAttributes } = repeaterProps;
-	const attribute = attributes[ attr_key ];
+	const { attrKey, attributes, control, setAttributes } = repeaterProps;
+	const attribute = attributes[ attrKey ];
 	const itemIndex = findIndex( attribute, { id: item.id } );
 
 	const updateAttributes = ( newAttributes: any ) => {
@@ -55,7 +55,7 @@ const SortableItem = ( {
 			...updatedValues[ itemIndex ],
 			...newAttributes,
 		};
-		setAttributes( { [ attr_key ]: updatedValues } );
+		setAttributes( { [ attrKey ]: updatedValues } );
 
 		if ( control?.onChange ) {
 			control.onChange( {

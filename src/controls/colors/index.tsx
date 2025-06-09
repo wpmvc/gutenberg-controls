@@ -23,7 +23,7 @@ import Indicator from './indicator';
 import { ColorsControlProps } from './types';
 
 export default function Colors( {
-	attr_key,
+	attrKey,
 	metaData,
 	control,
 	attributes,
@@ -31,28 +31,28 @@ export default function Colors( {
 	placement,
 	offset,
 }: ColorsControlProps ): JSX.Element {
-	const panelId = attr_key;
+	const panelId = attrKey;
 	const resetAll = () => {
 		setAttributes( {
-			[ attr_key ]: metaData?.attributes?.[ attr_key ]?.default ?? {},
+			[ attrKey ]: metaData?.attributes?.[ attrKey ]?.default ?? {},
 		} );
 	};
 
 	const hasValue = ( elementName: any ) => {
-		const elementColors = attributes[ attr_key ]?.[ elementName ] ?? {};
+		const elementColors = attributes[ attrKey ]?.[ elementName ] ?? {};
 		const elementDefaultColors =
-			metaData?.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
+			metaData?.attributes[ attrKey ]?.default?.[ elementName ] ?? {};
 
 		return ! isEqual( elementColors, elementDefaultColors );
 	};
 
 	const onDeselect = ( elementName: any ) => {
 		const elementDefaultColors =
-			metaData?.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
+			metaData?.attributes[ attrKey ]?.default?.[ elementName ] ?? {};
 
 		setAttributes( {
-			[ attr_key ]: {
-				...attributes[ attr_key ],
+			[ attrKey ]: {
+				...attributes[ attrKey ],
 				[ elementName ]: elementDefaultColors,
 			},
 		} );
@@ -100,7 +100,7 @@ export default function Colors( {
 					const element = control.items[ name ];
 					element.name = name;
 					const elementColors =
-						attributes[ attr_key ]?.[ element.name ] ?? {};
+						attributes[ attrKey ]?.[ element.name ] ?? {};
 					const { label } = element;
 
 					return (
@@ -139,7 +139,7 @@ export default function Colors( {
 									return (
 										<Popover
 											element={ element }
-											attr_key={ attr_key }
+											attrKey={ attrKey }
 											attributes={ attributes }
 											setAttributes={ setAttributes }
 											elementColors={ elementColors }

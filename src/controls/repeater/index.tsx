@@ -42,8 +42,8 @@ import {
 } from './styles';
 
 export default function Repeater( props: RepeaterControlProps ) {
-	const { control, attributes, attr_key, setAttributes } = props;
-	const attribute = attributes[ attr_key ];
+	const { control, attributes, attrKey, setAttributes } = props;
+	const attribute = attributes[ attrKey ];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
 
@@ -63,9 +63,9 @@ export default function Repeater( props: RepeaterControlProps ) {
 				( item: Item ) => item.id === over.id
 			);
 			const newAttributes = arrayMove( attribute, oldIndex, newIndex );
-			setAttributes( { [ attr_key ]: newAttributes } );
+			setAttributes( { [ attrKey ]: newAttributes } );
 		},
-		[ attribute, setAttributes, attr_key ]
+		[ attribute, setAttributes, attrKey ]
 	);
 
 	useEffect( () => {
@@ -87,9 +87,9 @@ export default function Repeater( props: RepeaterControlProps ) {
 			collapsed: true,
 		};
 		const newAttributes = [ ...attribute, newItem ];
-		setAttributes( { [ attr_key ]: newAttributes } );
+		setAttributes( { [ attrKey ]: newAttributes } );
 		setNewItemAdded( true );
-	}, [ attribute, setAttributes, attr_key ] );
+	}, [ attribute, setAttributes, attrKey ] );
 
 	const isDisabledRemove =
 		( undefined === control?.preventEmpty || control.preventEmpty ) &&
@@ -103,9 +103,9 @@ export default function Repeater( props: RepeaterControlProps ) {
 			const newAttributes = attribute.filter(
 				( item: Item ) => item.id !== id
 			);
-			setAttributes( { [ attr_key ]: newAttributes } );
+			setAttributes( { [ attrKey ]: newAttributes } );
 		},
-		[ attribute, setAttributes, attr_key, isDisabledRemove ]
+		[ attribute, setAttributes, attrKey, isDisabledRemove ]
 	);
 
 	const duplicateItem = useCallback(
@@ -119,10 +119,10 @@ export default function Repeater( props: RepeaterControlProps ) {
 					id: getMaxId( attribute ) + 1,
 				};
 				const newAttributes = [ ...attribute, newItem ];
-				setAttributes( { [ attr_key ]: newAttributes } );
+				setAttributes( { [ attrKey ]: newAttributes } );
 			}
 		},
-		[ attribute, setAttributes, attr_key ]
+		[ attribute, setAttributes, attrKey ]
 	);
 
 	const toggleCollapse = useCallback(
@@ -130,9 +130,9 @@ export default function Repeater( props: RepeaterControlProps ) {
 			const newAttributes = attribute.map( ( item: Item ) =>
 				item.id === id ? { ...item, collapsed: ! item.collapsed } : item
 			);
-			setAttributes( { [ attr_key ]: newAttributes } );
+			setAttributes( { [ attrKey ]: newAttributes } );
 		},
-		[ attribute, setAttributes, attr_key ]
+		[ attribute, setAttributes, attrKey ]
 	);
 
 	return (

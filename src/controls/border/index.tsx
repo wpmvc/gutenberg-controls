@@ -20,10 +20,10 @@ import { getValue, updateAttribute } from '../../utils';
 import { BorderControlProps } from './types';
 
 export default function Border( props: BorderControlProps ): JSX.Element {
-	const { attr_key, control, metaData, placement, offset } = props;
+	const { attrKey, control, metaData, placement, offset } = props;
 	const options = control.options ?? [ 'border', 'radius' ];
-	const panelId = attr_key;
-	const defaultValues = metaData?.attributes?.[ attr_key ]?.default ?? {};
+	const panelId = attrKey;
+	const defaultValues = metaData?.attributes?.[ attrKey ]?.default ?? {};
 	const attribute = getValue( props );
 
 	/**
