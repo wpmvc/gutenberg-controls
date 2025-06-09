@@ -9,7 +9,7 @@ import { useState } from '@wordpress/element';
  * Internal dependencies
  */
 import Label from '../components/label';
-import { ControlProps } from '../types/control';
+import { CommonControlProps } from '../types/control';
 import { isDisabled } from '../utils';
 import styled from 'styled-components';
 
@@ -24,7 +24,7 @@ const StyledBoxControl = styled( BoxControl )< {
 	` }
 `;
 
-export default function Dimension( props: ControlProps ): JSX.Element {
+export default function Dimension( props: CommonControlProps ): JSX.Element {
 	const { attr_key, control, attributes, setAttributes } = props;
 	const [ values, setValues ] = useState< any >( attributes[ attr_key ] );
 

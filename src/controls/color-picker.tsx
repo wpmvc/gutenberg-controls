@@ -1,9 +1,7 @@
-//@ts-ignore
 import { ColorPicker, Dropdown, Button } from '@wordpress/components';
 //@ts-ignore
 import { useViewportMatch } from '@wordpress/compose';
-import { ControlProps } from '../types/control';
-import { useMemo } from 'react';
+import { CommonControlProps } from '../types/control';
 
 export default function PickColor( {
 	attr_key,
@@ -12,7 +10,7 @@ export default function PickColor( {
 	setAttributes,
 	placement,
 	offset,
-}: ControlProps ): JSX.Element {
+}: CommonControlProps ): JSX.Element {
 	function dropdownProps() {
 		const isMobile = useViewportMatch( 'medium', '<' );
 		return ! isMobile

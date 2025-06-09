@@ -6,7 +6,6 @@ import {
 	__experimentalBorderBoxControl as BorderBoxControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-	//@ts-ignore
 } from '@wordpress/components';
 //@ts-ignore
 import { __experimentalBorderRadiusControl as BorderRadiusControl } from '@wordpress/block-editor';
@@ -17,26 +16,14 @@ import { useViewportMatch } from '@wordpress/compose';
  * External dependencies
  */
 import { isEqual } from 'lodash';
-import { getValue, updateAttribute } from '../utils';
-import { Control, ControlProps } from '../types/control';
-
-/**
- * Types for the props of the Border component.
- */
-type BorderControl = Control & {
-	options?: string[];
-	insidePanel?: boolean;
-};
-
-type BorderControlProps = ControlProps & {
-	control: BorderControl;
-};
+import { getValue, updateAttribute } from '../../utils';
+import { BorderControlProps } from './types';
 
 export default function Border( props: BorderControlProps ): JSX.Element {
 	const { attr_key, control, metaData, placement, offset } = props;
 	const options = control.options ?? [ 'border', 'radius' ];
 	const panelId = attr_key;
-	const defaultValues = metaData.attributes[ attr_key ]?.default ?? {};
+	const defaultValues = metaData?.attributes?.[ attr_key ]?.default ?? {};
 	const attribute = getValue( props );
 
 	/**

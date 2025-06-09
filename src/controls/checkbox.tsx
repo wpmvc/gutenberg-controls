@@ -1,13 +1,12 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { CheckboxControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { CommonControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, isDisabled, updateAttribute } from '../utils';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ const StyledCheckboxControl = styled( CheckboxControl )< {
 	` }
 `;
 
-export default function Checkbox( props: ControlProps ): JSX.Element {
+export default function Checkbox( props: CommonControlProps ): JSX.Element {
 	const { control } = props;
 
 	return (

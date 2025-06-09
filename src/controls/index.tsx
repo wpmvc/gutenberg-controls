@@ -7,7 +7,7 @@ import { Fragment, ComponentType } from '@wordpress/element';
  * External dependencies
  */
 import { has } from 'lodash';
-import { ControlProps, Control } from '../types/control';
+import { ControlProps, Control, ControlRootProps } from '../types/control';
 
 /**
  * Internal dependencies
@@ -39,7 +39,6 @@ const defaultComponents: {
 	[ key: string ]: ComponentType< ControlProps >;
 } = {
 	tabs: Tabs,
-	//@ts-ignore
 	color: PickColor,
 	colors: Colors,
 	checkbox: Checkbox,
@@ -80,7 +79,6 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
 	}
 
 	return (
-		//@ts-ignore
 		<Fragment>
 			{ controlKeys.map( ( key ) => {
 				const control: Control = _controls[ key ] ?? {};
@@ -121,12 +119,15 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
 }
 
 /**
- * @param {ControlProps} props Component props
+ * @param {ControlRootProps} props Component props
  * @returns {JSX.Element | null} Rendered control components or null
  */
-export default function Controls( props: ControlProps ): JSX.Element | null {
+export default function Controls(
+	props: ControlRootProps
+): JSX.Element | null {
 	const { components = {} } = props;
 	return (
+		//@ts-ignore
 		<PrivateControls
 			{ ...props }
 			components={ { ...defaultComponents, ...components } }

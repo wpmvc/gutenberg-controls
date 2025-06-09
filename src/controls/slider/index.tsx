@@ -1,26 +1,21 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { Control, ControlProps } from '../types/control';
-import Label from '../components/label';
-import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
+import Label from '../../components/label';
+import {
+	getValue,
+	isDisabled,
+	memoCallback,
+	updateAttribute,
+} from '../../utils';
 import { memo } from 'react';
-
-type SliderControl = Control & {
-	max?: number;
-	min?: number;
-};
-
-type SliderControlProps = ControlProps & {
-	control: SliderControl;
-};
+import { SliderControlProps } from './types';
 
 const Slider = memo( ( props: SliderControlProps ) => {
 	const { control } = props;

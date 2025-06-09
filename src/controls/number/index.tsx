@@ -1,30 +1,19 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import styled from 'styled-components';
 
 /**
  * Internal dependencies
  */
-import { Control, ControlProps } from '../types/control';
-import Label from '../components/label';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import Label from '../../components/label';
+import { getValue, isDisabled, updateAttribute } from '../../utils';
+import { NumberControlProps } from './types';
 
 const StyledBlockEditorControl = styled.div`
 	margin-bottom: 24px;
 `;
-
-type NumberControl = Control & {
-	precision?: boolean;
-	min?: number;
-	max?: number;
-};
-
-type NumberControlProps = ControlProps & {
-	control: NumberControl;
-};
 
 export default function Number( props: NumberControlProps ): JSX.Element {
 	const { control } = props;
@@ -45,6 +34,7 @@ export default function Number( props: NumberControlProps ): JSX.Element {
 	return (
 		<StyledBlockEditorControl>
 			<NumberControl
+				//@ts-ignore
 				label={ <Label { ...props } /> }
 				size="__unstable-large"
 				step={ 1 }

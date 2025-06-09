@@ -1,4 +1,3 @@
-//@ts-ignore
 import { TabPanel as WpTabPanel } from '@wordpress/components';
 import styled from 'styled-components';
 

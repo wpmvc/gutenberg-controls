@@ -15,9 +15,13 @@ export function getValue(
 ): any {
 	const { attr_key, attributes, device } = controlProps;
 	// @ts-ignore
-	return isResponsive( controlProps )
-		? attributes[ attr_key ]?.[ device ] ?? defaultValue
-		: attributes[ attr_key ];
+	if ( isResponsive( controlProps ) ) {
+		if ( device !== undefined && device !== null ) {
+			return attributes[ attr_key ]?.[ device ] ?? defaultValue;
+		}
+		return defaultValue;
+	}
+	return attributes[ attr_key ];
 }
 
 export function updateAttribute(
@@ -37,7 +41,9 @@ export function updateAttribute(
 			: value,
 	} );
 
+	//@ts-ignore
 	if ( control?.onChange ) {
+		//@ts-ignore
 		control.onChange( controlProps );
 	}
 }
@@ -45,14 +51,18 @@ export function updateAttribute(
 export function isDisabled( controlProps: ControlProps ): boolean {
 	const { control, attributes, isProAvailable } = controlProps;
 
+	//@ts-ignore
 	if ( !! control.isPro && ! isProAvailable ) {
 		return true;
 	}
 
+	//@ts-ignore
 	if ( typeof control.isDisabled === 'function' ) {
+		//@ts-ignore
 		return control.isDisabled( controlProps );
 	}
 
+	//@ts-ignore
 	return !! control.isDisabled;
 }
 

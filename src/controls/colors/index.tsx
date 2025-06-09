@@ -8,7 +8,6 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	Dropdown,
-	//@ts-ignore
 } from '@wordpress/components';
 
 /**
@@ -21,16 +20,7 @@ import { isEqual } from 'lodash';
  */
 import Popover from './popover';
 import Indicator from './indicator';
-import { Control, ControlProps } from '../../types/control';
-
-type ColorsControl = Control & {
-	items: { [ key: string ]: any };
-	insidePanel?: boolean;
-};
-
-type ColorsControlProps = ControlProps & {
-	control: ColorsControl;
-};
+import { ColorsControlProps } from './types';
 
 export default function Colors( {
 	attr_key,
@@ -44,21 +34,21 @@ export default function Colors( {
 	const panelId = attr_key;
 	const resetAll = () => {
 		setAttributes( {
-			[ attr_key ]: metaData.attributes[ attr_key ].default,
+			[ attr_key ]: metaData?.attributes?.[ attr_key ]?.default ?? {},
 		} );
 	};
 
 	const hasValue = ( elementName: any ) => {
 		const elementColors = attributes[ attr_key ]?.[ elementName ] ?? {};
 		const elementDefaultColors =
-			metaData.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
+			metaData?.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
 
 		return ! isEqual( elementColors, elementDefaultColors );
 	};
 
 	const onDeselect = ( elementName: any ) => {
 		const elementDefaultColors =
-			metaData.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
+			metaData?.attributes[ attr_key ]?.default?.[ elementName ] ?? {};
 
 		setAttributes( {
 			[ attr_key ]: {

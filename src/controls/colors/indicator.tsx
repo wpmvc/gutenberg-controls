@@ -9,7 +9,6 @@ import {
 	Button,
 	FlexItem,
 	Flex,
-	//@ts-ignore
 } from '@wordpress/components';
 
 /**

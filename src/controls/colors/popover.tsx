@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-//@ts-ignore
 import { __experimentalDropdownContentWrapper as DropdownContentWrapper } from '@wordpress/components';
 import { useMemo } from '@wordpress/element';
 

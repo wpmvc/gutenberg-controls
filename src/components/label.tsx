@@ -3,14 +3,14 @@ import { DropdownMenu } from '@wordpress/components';
 import styled from 'styled-components';
 import { __ } from '@wordpress/i18n';
 import { values, omit } from 'lodash';
-import { ControlProps } from '../types/control';
+import { CommonControlProps, Device } from '../types/control';
 import { DropdownOption } from '@wordpress/components/build-types/dropdown-menu/types';
 import ProBadge from './pro-badge';
 
 type ResponsiveProps = {
-	device: 'desktop' | 'tablet' | 'mobile';
-	onChangeDevice?: ( device: 'desktop' | 'tablet' | 'mobile' ) => void;
-}
+	device?: Device;
+	onChangeDevice?: ( device: Device ) => void;
+};
 
 const StyledDropdown = styled( DropdownMenu )`
 	.components-button.has-icon {
@@ -82,7 +82,7 @@ const StyledLabel = styled.span`
 	padding: 0px;
 `;
 
-export default function Label( { control, ...props }: ControlProps ) {
+export default function Label( { control, ...props }: CommonControlProps ) {
 	return (
 		<div>
 			<StyledLabel>{ control.label }</StyledLabel>

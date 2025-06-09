@@ -6,7 +6,6 @@ import {
 	ColorPalette,
 	GradientPicker,
 	__experimentalVStack as VStack,
-	//@ts-ignore
 } from '@wordpress/components';
 
 export default function ColorControl( { onChange, value }: any ) {

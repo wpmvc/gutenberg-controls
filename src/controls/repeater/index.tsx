@@ -31,9 +31,9 @@ import {
  * Internal dependencies
  */
 import Label from '../../components/label';
-import SortableItem from './SortableItem';
+import SortableItem from './sortable-item';
 import { getMaxId } from './utils';
-import { Item, RepeaterProps } from './types';
+import { Item, RepeaterControlProps } from './types';
 import {
 	ButtonContainer,
 	Container,
@@ -41,7 +41,7 @@ import {
 	Label as StyledLabel,
 } from './styles';
 
-export default function Repeater( props: RepeaterProps ) {
+export default function Repeater( props: RepeaterControlProps ) {
 	const { control, attributes, attr_key, setAttributes } = props;
 	const attribute = attributes[ attr_key ];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
@@ -142,6 +142,7 @@ export default function Repeater( props: RepeaterProps ) {
 			}` }
 		>
 			<StyledLabel className="repeater-label">
+				{ /* @ts-ignore */ }
 				<Label { ...props } />
 			</StyledLabel>
 			<Container className="repeater-container">

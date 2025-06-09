@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 
 /**
@@ -12,7 +11,7 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { CommonControlProps } from '../types/control';
 import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 import Label from '../components/label';
 import styled from 'styled-components';
@@ -42,7 +41,7 @@ const StyledInputControl = styled( InputControl )< {
 	` }
 `;
 
-const Text = memo( ( props: ControlProps ) => {
+const Text = memo( ( props: CommonControlProps ) => {
 	const { control } = props;
 	const { helpText } = control || {};
 

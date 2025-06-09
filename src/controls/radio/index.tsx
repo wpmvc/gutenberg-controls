@@ -1,14 +1,18 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { RadioControl } from '@wordpress/components';
-import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
-import Label from '../components/label';
-import { RadioControlProps } from '../types/control';
+import {
+	getValue,
+	isDisabled,
+	memoCallback,
+	updateAttribute,
+} from '../../utils';
+import Label from '../../components/label';
 import styled from 'styled-components';
 import { memo } from 'react';
 import { isFunction } from 'lodash';
+import { RadioControlProps } from './types';
 
 const StyleRadioControl = styled( RadioControl )< {
 	isDisabled: string;
@@ -27,6 +31,7 @@ const Radio = memo( ( props: RadioControlProps ) => {
 
 	return (
 		<StyleRadioControl
+			//@ts-ignore
 			label={ <Label { ...props } /> }
 			options={ isFunction( options ) ? options( attributes ) : options }
 			selected={ getValue( props ) }

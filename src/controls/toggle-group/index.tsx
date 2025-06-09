@@ -4,22 +4,21 @@
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-	//@ts-ignore
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { ToggleGroupControlProps } from '../types/control';
-import Label from '../components/label';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import Label from '../../components/label';
+import { getValue, isDisabled, updateAttribute } from '../../utils';
 
 /**
  * External dependencies
  */
 import styled from 'styled-components';
 import { isFunction } from 'lodash';
+import { ToggleGroupControlProps } from './types';
 
 const StyledToggleGroup = styled( ToggleGroupControl )< {
 	isDisabled: string;

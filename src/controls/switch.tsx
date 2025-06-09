@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { memo } from 'react';
 import { ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -14,7 +13,7 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { CommonControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 
@@ -25,7 +24,7 @@ const StyledToggleControl = styled( ToggleControl )`
 	// }
 `;
 
-const Switch = memo( ( props: ControlProps ) => {
+const Switch = memo( ( props: CommonControlProps ) => {
 	const { control } = props;
 	return (
 		<StyledToggleControl

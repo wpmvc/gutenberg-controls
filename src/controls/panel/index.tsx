@@ -1,23 +1,13 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { PanelBody } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { Control, ControlProps, ControlsType } from '../types/control';
-import { PrivateControls } from '.';
-
-type PanelControl = Control & {
-	initialOpen?: boolean;
-	controls: ControlsType;
-};
-
-type PanelControlProps = ControlProps & {
-	control: PanelControl;
-};
+import { PrivateControls } from '..';
+import { PanelControlProps } from './types';
 
 export default function Panel( props: PanelControlProps ): JSX.Element {
 	const { control } = props;

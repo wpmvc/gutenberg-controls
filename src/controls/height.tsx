@@ -8,7 +8,7 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
-import { ControlProps } from '../types/control';
+import { CommonControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, isDisabled, updateAttribute } from '../utils';
 
@@ -27,7 +27,7 @@ const StyledHeightControl = styled( HeightControl )< {
 	` }
 `;
 
-export default function Height( props: ControlProps ): JSX.Element {
+export default function Height( props: CommonControlProps ): JSX.Element {
 	const { control } = props;
 	return (
 		<StyledBlockEditorControl>

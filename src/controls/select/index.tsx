@@ -1,16 +1,15 @@
 /**
  * WordPress dependencies
  */
-//@ts-ignore
 import { SelectControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { SelectControlProps } from '../types/control';
-import Label from '../components/label';
-import { getValue, isDisabled, updateAttribute } from '../utils';
+import Label from '../../components/label';
+import { getValue, isDisabled, updateAttribute } from '../../utils';
 import { isFunction } from 'lodash';
+import { SelectControlProps } from './types';
 
 export default function Select( props: SelectControlProps ) {
 	const { control, attributes } = props;
@@ -19,6 +18,7 @@ export default function Select( props: SelectControlProps ) {
 
 	return (
 		<SelectControl
+			//@ts-ignore
 			label={ <Label { ...props } /> }
 			help={ helpText }
 			options={ isFunction( options ) ? options( attributes ) : options }
