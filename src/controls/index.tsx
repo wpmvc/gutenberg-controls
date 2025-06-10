@@ -31,6 +31,7 @@ import Notice from './notice';
 import Tabs from './tabs';
 import styled from 'styled-components';
 import Group from './group';
+import Row from './row';
 
 /**
  * Mapping of control types to their respective components
@@ -58,6 +59,7 @@ const defaultComponents: {
 	text: Text,
 	toggleGroup: ToggleGroup,
 	repeater: Repeater,
+	row: Row
 };
 
 const StyledControls = styled.div`

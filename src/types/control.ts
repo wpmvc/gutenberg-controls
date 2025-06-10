@@ -21,6 +21,7 @@ import {
 	RepeaterControlProps,
 	RepeaterControlType,
 } from '../controls/repeater/types';
+import { RowControlProps, RowControlType } from '../controls/row/types';
 import {
 	SelectControlProps,
 	SelectControlType,
@@ -54,7 +55,8 @@ export type ControlType =
 	| 'switch'
 	| 'text'
 	| 'toggleGroup'
-	| 'repeater';
+	| 'repeater'
+	| 'row';
 
 // Options type used for select, radio, toggleGroup
 export type Options =
@@ -100,6 +102,7 @@ export type Control =
 	| PanelControlType
 	| RadioControlType
 	| RepeaterControlType
+	| RowControlType
 	| SelectControlType
 	| SliderControlType
 	| TabsControlType
@@ -144,6 +147,7 @@ export type ControlProps =
 	| RadioControlProps
 	| RadioControlProps
 	| RepeaterControlProps
+	| RowControlProps
 	| SelectControlProps
 	| SliderControlProps
 	| TabsControlProps

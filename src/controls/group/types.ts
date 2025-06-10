@@ -7,7 +7,7 @@ import {
 export type GroupControlType = BaseControl & {
 	type: 'group';
 	controls: ControlsType;
-	perRow?: number;
+	isRow?: boolean;
 };
 
 export type GroupControlProps = BaseControlProps & {

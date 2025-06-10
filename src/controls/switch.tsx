@@ -29,6 +29,7 @@ const Switch = memo( ( props: CommonControlProps ) => {
 	return (
 		<StyledToggleControl
 			label={ <Label { ...props } /> }
+			help={ control.helpText }
 			checked={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			disabled={ isDisabled( props ) }
