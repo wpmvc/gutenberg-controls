@@ -59,7 +59,7 @@ const defaultComponents: {
 	text: Text,
 	toggleGroup: ToggleGroup,
 	repeater: Repeater,
-	row: Row
+	row: Row,
 };
 
 const StyledControls = styled.div`
