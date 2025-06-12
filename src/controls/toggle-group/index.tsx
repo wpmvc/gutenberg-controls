@@ -52,6 +52,7 @@ export default function ToggleGroup(
 			size="__unstable-large"
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 			className={ control?.className }
+			required={ control?.required }
 			__nextHasNoMarginBottom
 		>
 			{ toggleOptions.map( ( option: any, index: any ) => {

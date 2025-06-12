@@ -12,10 +12,6 @@ import { CommonControlProps } from '../types/control';
 import Label from '../components/label';
 import { getValue, isDisabled, updateAttribute } from '../utils';
 
-const StyledBlockEditorControl = styled.div`
-	margin-bottom: 24px;
-`;
-
 const StyledHeightControl = styled( HeightControl )< {
 	isDisabled: string;
 } >`
@@ -29,16 +25,15 @@ const StyledHeightControl = styled( HeightControl )< {
 
 export default function Height( props: CommonControlProps ): JSX.Element {
 	const { control } = props;
+
 	return (
-		<StyledBlockEditorControl>
-			<StyledHeightControl
-				label={ <Label { ...props } /> }
-				value={ getValue( props ) }
-				onChange={ ( value: any ) => updateAttribute( value, props ) }
-				isDisabled={ isDisabled( props ) ? 'true' : 'false' }
-				className={ control?.className }
-				required={ control?.required }
-			/>
-		</StyledBlockEditorControl>
+		<StyledHeightControl
+			label={ <Label { ...props } /> }
+			value={ getValue( props ) }
+			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+			className={ control?.className }
+			required={ control?.required }
+		/>
 	);
 }

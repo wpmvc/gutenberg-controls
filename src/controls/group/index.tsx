@@ -49,8 +49,8 @@ export default function Group( props: GroupControlProps ): JSX.Element {
 	const { control } = props;
 	return (
 		<StyledGroup className="components-base-control">
-			{ /* @ts-ignore */ }
 			<label>
+				{ /* @ts-ignore */ }
 				<Label { ...props } />
 			</label>
 			<GroupControls
