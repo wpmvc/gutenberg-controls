@@ -12,7 +12,7 @@ import { ControlProps, Control, ControlRootProps } from '../types/control';
 /**
  * Internal dependencies
  */
-import Checkbox from './panel';
+import Checkbox from './checkbox';
 import Border from './border';
 import Dimension from './dimension';
 import Height from './height';
