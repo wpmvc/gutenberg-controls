@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import {
 	BorderControlProps,
 	BorderControlType,
@@ -78,6 +79,7 @@ export type BaseControl = {
 	isResponsive?: boolean;
 	isPro?: boolean;
 	required?: boolean;
+	style?: CSSProperties | undefined;
 };
 
 // All other control types (no options, no isMulti)

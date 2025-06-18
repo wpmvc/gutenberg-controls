@@ -63,11 +63,21 @@ const defaultComponents: {
 };
 
 const StyledControls = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-`;
+	.wpmvc-field {
+		&:not( .panel ),
+		&:has( + :not( .panel ) ) {
+			padding-bottom: 20px;
+		}
 
+		&:has( :last-child:not( .panel ) ):last-child {
+			padding-bottom: 0px;
+		}
+
+		.components-panel__body {
+			border-top: 0;
+		}
+	}
+`;
 /**
  * PrivateControls component that dynamically renders various control components
  * based on the `controls` prop provided.
@@ -116,13 +126,18 @@ export function PrivateControls( props: ControlProps ): JSX.Element | null {
 
 				// Return the actual control component with the necessary props
 				return (
-					<ControlView
-						{ ...props }
-						key={ key } // Use control key for each component to ensure uniqueness
-						attrKey={ key }
-						control={ control }
-						attributes={ attributes }
-					/>
+					<div
+						key={ key }
+						className={ `wpmvc-field ${ control.type }` }
+						style={ control.style }
+					>
+						<ControlView
+							{ ...props }
+							attrKey={ key }
+							control={ control }
+							attributes={ attributes }
+						/>
+					</div>
 				);
 			} ) }
 		</Fragment>

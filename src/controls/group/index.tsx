@@ -26,7 +26,7 @@ const GroupControls = styled.div< {
 	${ ( { $isRow, $perRow = 2 } ) =>
 		$isRow
 			? `
-        .components-base-control {
+        > .wpmvc-field {
           flex: 0 0 100%;
 
           @media (min-width: 768px) {
