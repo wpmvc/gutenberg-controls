@@ -7,3 +7,4 @@ vite.config.mjs
 src/
 tsconfig.json
 .gitignore
+pnpm-lock.yaml
