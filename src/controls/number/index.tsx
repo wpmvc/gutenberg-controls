@@ -30,6 +30,7 @@ export default function Number( props: NumberControlProps ): JSX.Element {
 		<NumberControl
 			//@ts-ignore
 			label={ <Label { ...props } /> }
+			labelPosition={ control?.labelPosition }
 			size="__unstable-large"
 			step={ 1 }
 			value={ getValue( props ) }
