@@ -1,6 +1,6 @@
 # @wpmvc/gutenberg-controls
 
-> ⚠️ **Deprecated:** This package is no longer maintained. Please use [@wpmvc/fields](https://www.npmjs.com/package/@wpmvc/fields) instead.
+> ⚠️ **Deprecated:** This package is no longer maintained. Please use [@wpmvc/fields](https://github.com/wpmvc/jskit/tree/master/packages/fields) instead.
 
 [![npm](https://img.shields.io/npm/v/@wpmvc/gutenberg-controls.svg)](https://www.npmjs.com/package/@wpmvc/gutenberg-controls)
 [![downloads](https://img.shields.io/npm/dm/@wpmvc/gutenberg-controls.svg)](https://www.npmjs.com/package/@wpmvc/gutenberg-controls)
@@ -12,7 +12,7 @@
 
 ## Installation
 
-> ⚠️ This package is deprecated. Please consider migrating to [@wpmvc/fields](https://www.npmjs.com/package/@wpmvc/fields).
+> ⚠️ This package is deprecated. Please consider migrating to [@wpmvc/fields](https://github.com/wpmvc/jskit/tree/master/packages/fields).
 
 ### NPM
 
